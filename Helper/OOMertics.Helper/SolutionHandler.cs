@@ -1,10 +1,6 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using Microsoft.Build.Locator;
+﻿using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.MSBuild;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace OOMertics.Helper
 {
@@ -24,7 +20,7 @@ namespace OOMertics.Helper
             if (!MSBuildLocator.IsRegistered)
             {
                 MSBuildLocator.RegisterDefaults();
-            }            
+            }
             var workspace = MSBuildWorkspace.Create();
             await workspace.OpenSolutionAsync(solutionFilePath);
             return new SolutionHandler(workspace, await GetSolutionProjectsAsync(workspace));

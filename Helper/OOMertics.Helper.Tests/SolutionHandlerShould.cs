@@ -1,5 +1,3 @@
-using FluentAssertions;
-
 namespace OOMertics.Helper.Tests
 {
     public class SolutionHandlerShould
@@ -11,7 +9,7 @@ namespace OOMertics.Helper.Tests
         {
             var getToMainDir = @"..\..\..\..\..\";
             var solutionHandler = await SolutionHandler.OpenAsync($"{getToMainDir}{path}", solutionName);
-            
+
             /*
             var projects = solutionHandler.getProjects();
             projects.Count().Should().BeGreaterThan(0);

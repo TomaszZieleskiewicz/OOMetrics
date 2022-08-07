@@ -8,7 +8,7 @@ namespace OOMertics.Helper
 
         public readonly string AssemblyName;
         public readonly List<DocumentHandler> Documents;
-        
+
         private ProjectHandler(Project project, List<DocumentHandler> documents)
         {
             Project = project;

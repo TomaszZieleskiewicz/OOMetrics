@@ -50,14 +50,14 @@ namespace OOMertics.Helper
             var namedTypes = declarationNodes
                 .OfType<IdentifierNameSyntax>()
                 .Select(ins => ParentDocument.SemanticModel.GetSymbolInfo(ins).Symbol)
-                                // .Where(nt => nt.ContainingNamespace.ToString().StartsWith("ArchitectureGuards"))
+                // .Where(nt => nt.ContainingNamespace.ToString().StartsWith("ArchitectureGuards"))
                 .ToHashSet(SymbolEqualityComparer.Default)
                 .OfType<INamedTypeSymbol>();
 
             var expressionTypes = declarationNodes
                 .OfType<ExpressionSyntax>()
                 .Select(es => ParentDocument.SemanticModel.GetTypeInfo(es).Type)
-                 //.Where(nt => nt.ContainingNamespace.ToString().StartsWith("ArchitectureGuards"))
+                //.Where(nt => nt.ContainingNamespace.ToString().StartsWith("ArchitectureGuards"))
                 .ToHashSet(SymbolEqualityComparer.Default)
                 .OfType<INamedTypeSymbol>();
 
