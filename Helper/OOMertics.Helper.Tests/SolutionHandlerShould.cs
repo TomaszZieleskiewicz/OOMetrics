@@ -2,14 +2,17 @@ using FluentAssertions;
 
 namespace OOMertics.Helper.Tests
 {
-    public class Tests
+    public class SolutionHandlerShould
     {
         [Theory]
-        [InlineData(@"E:\Poligon\github\ArchitectureGuards\ArchitectureGuards", "ArchitectureGuards")]
-        [InlineData(@"E:\Poligon\github\OOMetrics", "OOMetrics")]
-        public async void ProperlyLoadSolutions(string path, string solution)
+        [InlineData(@".", "OOMetrics")]
+        [InlineData(@".\TestData\TestSolution", "TestSolution")]
+        public async void ProperlyLoadSolutions(string path, string solutionName)
         {
-            var solutionHandler = await SolutionHandler.OpenAsync(path, solution);
+            var getToMainDir = @"..\..\..\..\..\";
+            var solutionHandler = await SolutionHandler.OpenAsync($"{getToMainDir}{path}", solutionName);
+            
+            /*
             var projects = solutionHandler.getProjects();
             projects.Count().Should().BeGreaterThan(0);
             var notLoadedProjects = projects
@@ -24,7 +27,8 @@ namespace OOMertics.Helper.Tests
         public async void GetDependencies(string path, string solution)
         {
             var solutionHandler = await SolutionHandler.OpenAsync(path, solution);
-            var dependencies = await solutionHandler.getDependenciesAsync();
+            var dependencies = await solutionHandler.getSolutionDependenciesAsync();
+            */
         }
     }
 }
