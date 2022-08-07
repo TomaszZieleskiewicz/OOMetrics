@@ -1,0 +1,2 @@
+dotnet test /p:AltCover=true /p:AltCoverReport=".\coverage.xml" /p:AltCoverAssemblyExcludeFilter="^(?!(OOMertics)).*$|OOMertics.Helper.Tests"
+dotnet reportgenerator -reports:./coverage.xml -targetdir:./coverageReport  -reporttypes:Html

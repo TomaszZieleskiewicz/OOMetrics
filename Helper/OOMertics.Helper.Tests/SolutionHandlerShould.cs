@@ -25,6 +25,7 @@ namespace OOMertics.Helper.Tests
 
             var testProjest = projects.Where(p => p.AssemblyName == "TestProject").Single();
             testProjest.Documents.Count().Should().Be(9);
+            testProjest.Documents.First().ToString().Should().Be("ClassWithInterface.cs");
         }
     }
 }
