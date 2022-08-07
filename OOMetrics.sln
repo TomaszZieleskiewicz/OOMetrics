@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Metrics", "Metrics", "{9BE57367-CCBC-4729-B3D2-177BE7383B56}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOMetrics.Metrics", "Metrics\OOMetrics.Metrics\OOMetrics.Metrics.csproj", "{271D0783-805A-49BD-A796-0F7ADDE51194}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOMetrics.Metrics.Tests", "Metrics\OOMetrics.Metrics.Tests\OOMetrics.Metrics.Tests.csproj", "{CFA59B21-0861-47E3-A745-E7E7C7F06203}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOMertics.Helper", "Helper\OOMertics.Helper\OOMertics.Helper.csproj", "{6F7FBE90-69FE-4C54-9BA5-A2A11BFD8A98}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helper", "Helper", "{39A1B8C9-D3CC-467A-8D46-7B13E0F8387E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOMertics.Helper.Tests", "Helper\OOMertics.Helper.Tests\OOMertics.Helper.Tests.csproj", "{BF1A69B0-7B19-4721-AE1E-913B1B972603}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{271D0783-805A-49BD-A796-0F7ADDE51194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{271D0783-805A-49BD-A796-0F7ADDE51194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{271D0783-805A-49BD-A796-0F7ADDE51194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{271D0783-805A-49BD-A796-0F7ADDE51194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFA59B21-0861-47E3-A745-E7E7C7F06203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFA59B21-0861-47E3-A745-E7E7C7F06203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFA59B21-0861-47E3-A745-E7E7C7F06203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFA59B21-0861-47E3-A745-E7E7C7F06203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7FBE90-69FE-4C54-9BA5-A2A11BFD8A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7FBE90-69FE-4C54-9BA5-A2A11BFD8A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7FBE90-69FE-4C54-9BA5-A2A11BFD8A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7FBE90-69FE-4C54-9BA5-A2A11BFD8A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF1A69B0-7B19-4721-AE1E-913B1B972603}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF1A69B0-7B19-4721-AE1E-913B1B972603}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF1A69B0-7B19-4721-AE1E-913B1B972603}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF1A69B0-7B19-4721-AE1E-913B1B972603}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{271D0783-805A-49BD-A796-0F7ADDE51194} = {9BE57367-CCBC-4729-B3D2-177BE7383B56}
+		{CFA59B21-0861-47E3-A745-E7E7C7F06203} = {9BE57367-CCBC-4729-B3D2-177BE7383B56}
+		{6F7FBE90-69FE-4C54-9BA5-A2A11BFD8A98} = {39A1B8C9-D3CC-467A-8D46-7B13E0F8387E}
+		{BF1A69B0-7B19-4721-AE1E-913B1B972603} = {39A1B8C9-D3CC-467A-8D46-7B13E0F8387E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4F8AB7A-9F73-4ED0-A902-B8BD72C78286}
+	EndGlobalSection
+EndGlobal
