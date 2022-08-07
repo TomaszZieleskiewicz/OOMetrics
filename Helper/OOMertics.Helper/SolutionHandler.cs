@@ -11,8 +11,8 @@ namespace OOMertics.Helper
         public readonly List<ProjectHandler> Projects;
         private SolutionHandler(Workspace workspace, List<ProjectHandler> projects)
         {
-            this.Workspace = workspace;
-            this.Projects = projects;
+            Workspace = workspace;
+            Projects = projects;
         }
         public async static Task<SolutionHandler> OpenAsync(string path, string solutionName)
         {
@@ -23,10 +23,10 @@ namespace OOMertics.Helper
             }
             var workspace = MSBuildWorkspace.Create();
             await workspace.OpenSolutionAsync(solutionFilePath);
-            return new SolutionHandler(workspace, await GetSolutionProjectsAsync(workspace));
+            return new SolutionHandler(workspace, GetSolutionProjectsAsync(workspace));
         }
 
-        private static async Task<List<ProjectHandler>> GetSolutionProjectsAsync(Workspace workspace)
+        private static List<ProjectHandler> GetSolutionProjectsAsync(Workspace workspace)
         {
             return workspace.CurrentSolution.Projects.Select(async (project) => await ProjectHandler.CreateFromProjectAsync(project)).Select(t => t.Result).ToList();
         }
