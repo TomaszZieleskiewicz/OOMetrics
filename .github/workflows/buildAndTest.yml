@@ -15,10 +15,8 @@ concurrency:
   cancel-in-progress: true
  
 jobs:
-  build:
-
-    runs-on: windows-latest
-
+  "Build and test":
+    runs-on: ubuntu-latest
     steps:
     - name: Print github event
       env:
