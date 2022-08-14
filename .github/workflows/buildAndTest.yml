@@ -15,7 +15,8 @@ concurrency:
   cancel-in-progress: true
  
 jobs:
-  "Build and test":
+  build_and_test:
+    name: Build and test
     runs-on: ubuntu-latest
     steps:
     - name: Print github event
