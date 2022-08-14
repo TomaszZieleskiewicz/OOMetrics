@@ -6,11 +6,11 @@ namespace OOMertics.Helper.Tests
     public class SolutionHandlerShould
     {
         private static string solutionLocation = @"../../../../../";
-        private static string testSolutionDir = @"TestData\TestSolution";
+        private static string testSolutionDir = @"TestData/TestSolution";
         private static string testSolutionName = "TestSolution";
         [Theory]
         [InlineData(@"", "OOMetrics")]
-        [InlineData(@"TestData\TestSolution", "TestSolution")]
+        [InlineData(@"TestData/TestSolution", "TestSolution")]
         public async void ProperlyLoadSolutions(string path, string solutionName)
         {
             var pathA = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
