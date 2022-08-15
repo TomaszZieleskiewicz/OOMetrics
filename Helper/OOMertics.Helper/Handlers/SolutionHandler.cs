@@ -8,8 +8,10 @@ namespace OOMertics.Helper.Handlers
     public class SolutionHandler
     {
         private readonly Workspace Workspace;
+        private static Semaphore semaphore = new Semaphore(1, 1);
 
         public readonly List<ProjectHandler> Projects;
+        
         private SolutionHandler(Workspace workspace, List<ProjectHandler> projects)
         {
             Workspace = workspace;
@@ -17,14 +19,22 @@ namespace OOMertics.Helper.Handlers
         }
         public async static Task<SolutionHandler> OpenAsync(string path, string solutionName)
         {
-            var solutionFilePath = Directory.GetFiles(path, $"{solutionName}.sln", SearchOption.AllDirectories).Single();
-            if (!MSBuildLocator.IsRegistered)
+            semaphore.WaitOne();
+            try
             {
-                MSBuildLocator.RegisterDefaults();
+                var solutionFilePath = Directory.GetFiles(path, $"{solutionName}.sln", SearchOption.AllDirectories).Single();
+                if (!MSBuildLocator.IsRegistered)
+                {
+                    MSBuildLocator.RegisterDefaults();
+                }
+                var workspace = MSBuildWorkspace.Create();
+                await workspace.OpenSolutionAsync(solutionFilePath);
+                return new SolutionHandler(workspace, GetSolutionProjectsAsync(workspace));
             }
-            var workspace = MSBuildWorkspace.Create();
-            await workspace.OpenSolutionAsync(solutionFilePath);
-            return new SolutionHandler(workspace, GetSolutionProjectsAsync(workspace));
+            finally
+            {
+                semaphore.Release();
+            }
         }
         private static List<ProjectHandler> GetSolutionProjectsAsync(Workspace workspace)
         {
