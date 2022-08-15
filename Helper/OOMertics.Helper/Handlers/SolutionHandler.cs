@@ -8,7 +8,7 @@ namespace OOMertics.Helper.Handlers
     public class SolutionHandler
     {
         private readonly Workspace Workspace;
-        private static Semaphore semaphore = new Semaphore(1, 1);
+        private static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
 
         public readonly List<ProjectHandler> Projects;
         
@@ -19,7 +19,7 @@ namespace OOMertics.Helper.Handlers
         }
         public async static Task<SolutionHandler> OpenAsync(string path, string solutionName)
         {
-            semaphore.WaitOne();
+            await semaphore.WaitAsync();
             try
             {
                 var solutionFilePath = Directory.GetFiles(path, $"{solutionName}.sln", SearchOption.AllDirectories).Single();
