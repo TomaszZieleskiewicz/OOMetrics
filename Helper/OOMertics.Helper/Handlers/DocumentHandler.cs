@@ -20,8 +20,12 @@ namespace OOMertics.Helper.Handlers
             {
                 throw new ArgumentException($"Document {document.Name} is not supporting syntax tree");
             }
-
-            return new DocumentHandler(await document.GetSemanticModelAsync(), document);
+            var semanticModel = await document.GetSemanticModelAsync();
+            if (semanticModel is  null)
+            {
+                throw new ArgumentException($"Document {document.Name} semantic model is null");
+            }
+            return new DocumentHandler(semanticModel, document);
         }
         private List<DeclarationHandler> createDeclarations()
         {

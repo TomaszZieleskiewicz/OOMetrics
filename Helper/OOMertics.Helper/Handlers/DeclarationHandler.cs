@@ -11,7 +11,7 @@ namespace OOMertics.Helper.Handlers
         public readonly string Name;
         public readonly DeclarationType Type;
         public readonly string Namespace;
-        public readonly HashSet<INamedTypeSymbol> Dependencies = new HashSet<INamedTypeSymbol>();
+        public readonly HashSet<INamedTypeSymbol> Dependencies = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         public DeclarationHandler(BaseTypeDeclarationSyntax declarationNode, DocumentHandler parentDocument)
         {
             DeclarationNode = declarationNode;
