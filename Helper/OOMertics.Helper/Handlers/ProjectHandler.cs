@@ -1,6 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 
-namespace OOMertics.Helper
+namespace OOMertics.Helper.Handlers
 {
     public class ProjectHandler
     {

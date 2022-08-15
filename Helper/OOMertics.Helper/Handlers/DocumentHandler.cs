@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace OOMertics.Helper
+namespace OOMertics.Helper.Handlers
 {
     public class DocumentHandler
     {

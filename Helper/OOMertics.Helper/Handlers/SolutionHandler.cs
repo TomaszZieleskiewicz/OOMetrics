@@ -1,8 +1,9 @@
 ﻿using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
+using OOMetrics.Metrics.Interfaces;
 
-namespace OOMertics.Helper
+namespace OOMertics.Helper.Handlers
 {
     public class SolutionHandler
     {
@@ -25,7 +26,6 @@ namespace OOMertics.Helper
             await workspace.OpenSolutionAsync(solutionFilePath);
             return new SolutionHandler(workspace, GetSolutionProjectsAsync(workspace));
         }
-
         private static List<ProjectHandler> GetSolutionProjectsAsync(Workspace workspace)
         {
             return workspace.CurrentSolution.Projects.Select(async (project) => await ProjectHandler.CreateFromProjectAsync(project)).Select(t => t.Result).ToList();
