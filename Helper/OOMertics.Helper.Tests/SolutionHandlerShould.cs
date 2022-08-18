@@ -1,4 +1,3 @@
-using FluentAssertions;
 using OOMertics.Helper.Handlers;
 
 namespace OOMertics.Helper.Tests

@@ -1,6 +1,8 @@
-﻿using FluentAssertions;
-using OOMertics.Helper.Implementations;
-using System.Text.Json;
+﻿using OOMertics.Helper.Implementations;
+using OOMetrics.Metrics.Interfaces;
+using Newtonsoft.Json;
+using OOMetrics.Metrics.Models;
+using System.IO;
 
 namespace OOMertics.Helper.Tests
 {
@@ -10,12 +12,13 @@ namespace OOMertics.Helper.Tests
         public async void ProvideDeclarations()
         {
             var provider = new SolutionDeclarationProvider($"{solutionLocation}{testSolutionDir}", testSolutionName);
-            var declaraitons = await provider.GetDeclarations();
+            await provider.Load();
+            var declaraitons = provider.GetDeclarations();
             declaraitons.Count().Should().Be(16);
-            var options = new JsonSerializerOptions { WriteIndented = false };
-            var serialized = JsonSerializer.Serialize(declaraitons, options);
-            var referenceJson = File.ReadAllText("./TestData/testSolutionSerializedDependencies.json");
-            serialized.Should().Be(referenceJson);
+
+            JsonFileDataProvider.DumpIntoFile("./TestData/testSolutionSerializedDependencies.json", declaraitons);
+            var referenceData = JsonFileDataProvider.ReadFromFile("./TestData/testSolutionSerializedDependencies.json");
+            declaraitons.Should().BeEquivalentTo(referenceData);
         }
     }
 }

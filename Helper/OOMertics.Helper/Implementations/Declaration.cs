@@ -6,22 +6,22 @@ namespace OOMertics.Helper.Implementations
     {
         public string Name { get; }
         public DeclarationType Type { get; }
-        public string Namespace { get; }
-        public List<IDependency> Dependencies { get; }
+        public string DeclarationNamespace { get; }
+        public IEnumerable<IDependency> Dependencies { get; }
         public Declaration(string name, DeclarationType type, string declarationNamespace)
         {
             Name = name;
             Type = type;
-            Namespace = declarationNamespace;
+            DeclarationNamespace = declarationNamespace;
             Dependencies = new List<IDependency>();
         }
         public void AddDependency(Dependency dependency)
         {
-            Dependencies.Add(dependency);
-        }
+            Dependencies.Concat(new[] { dependency });
+        } 
         public override string ToString()
         {
-            return $"{Name}, {Type}, {Namespace}";
+            return $"{Name}, {Type}, {DeclarationNamespace}";
         }
     }
 }

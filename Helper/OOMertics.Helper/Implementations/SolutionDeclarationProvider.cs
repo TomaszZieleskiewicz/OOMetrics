@@ -5,16 +5,24 @@ namespace OOMertics.Helper.Implementations
 {
     public class SolutionDeclarationProvider : IDeclarationProvider
     {
-        private string path;
-        private string solutionName;
+        private readonly string path;
+        private readonly string solutionName;
+        private SolutionHandler solutionHandler;
         public SolutionDeclarationProvider(string path, string solutionName)
         {
             this.path = path;
             this.solutionName = solutionName;
         }
-        public async Task<List<IDeclaration>> GetDeclarations()
+        public async Task Load()
         {
-            var solutionHandler = await SolutionHandler.OpenAsync(path, solutionName);
+            solutionHandler = await SolutionHandler.OpenAsync(path, solutionName);
+        }
+        public IEnumerable<IDeclaration> GetDeclarations()
+        {
+            if(solutionHandler == null)
+            {
+                throw new Exception("Solution handler not loaded. Call Load first.");
+            }
             var declarations = new List<IDeclaration>();
             foreach (var project in solutionHandler.Projects)
             {

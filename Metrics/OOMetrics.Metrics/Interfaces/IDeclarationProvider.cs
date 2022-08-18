@@ -2,6 +2,6 @@
 {
     public interface IDeclarationProvider
     {
-        Task<List<IDeclaration>> GetDeclarations();
+        IEnumerable<IDeclaration> GetDeclarations();
     }
 }

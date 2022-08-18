@@ -6,7 +6,7 @@ namespace OOMetrics.Metrics.Interfaces
     {
         string Name { get; }
         DeclarationType Type { get; }
-        string Namespace { get; }
-        List<IDependency> Dependencies { get; }
+        string DeclarationNamespace { get; }
+        IEnumerable<IDependency> Dependencies { get; }
     }
 }
