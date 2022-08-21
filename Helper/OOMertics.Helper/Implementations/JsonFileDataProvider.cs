@@ -3,7 +3,7 @@ using OOMetrics.Abstractions;
 
 namespace OOMertics.Helper.Implementations
 {
-    public class JsonFileDataProvider
+    public class JsonFileDataProvider : IDeclarationProvider
     {
         public static void DumpIntoFile(string path, ICollection<IDeclaration> data)
         {

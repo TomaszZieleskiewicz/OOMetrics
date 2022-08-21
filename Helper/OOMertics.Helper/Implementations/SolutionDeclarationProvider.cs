@@ -15,10 +15,8 @@ namespace OOMertics.Helper.Implementations
         }
         public async Task<ICollection<IDeclaration>> GetDeclarations()
         {
-            if (solutionHandler == null)
-            {
-                solutionHandler = await SolutionHandler.OpenAsync(path, solutionName);
-            }
+            solutionHandler ??= await SolutionHandler.OpenAsync(path, solutionName);
+
             var declarations = new List<IDeclaration>();
             foreach (var project in solutionHandler.Projects)
             {

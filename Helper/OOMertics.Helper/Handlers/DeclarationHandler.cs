@@ -66,7 +66,6 @@ namespace OOMertics.Helper.Handlers
             Dependencies.UnionWith(namedTypes);
             Dependencies.UnionWith(expressionTypes);
         }
-        // From https://github.com/dotnet/runtime/blob/25c675ff78e0446fe596cea25c7e3969b0936a33/src/libraries/Microsoft.Extensions.Logging.Abstractions/gen/LoggerMessageGenerator.Parser.cs#L438
         private string GetNamespace(BaseTypeDeclarationSyntax syntax)
         {
             string nameSpace = string.Empty;

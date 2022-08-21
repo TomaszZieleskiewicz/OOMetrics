@@ -2,7 +2,7 @@
 
 namespace OOMertics.Helper.Implementations
 {
-    public class Dependency : IDependency
+    public class Dependency : ComparableByStringHash, IDependency
     {
         public string Name { get; }
         public string DependencyNamespace { get; }
@@ -12,19 +12,6 @@ namespace OOMertics.Helper.Implementations
             Name = name;
             DependencyNamespace = dependencyNamespace;
             ContainingPackage = containingPackage;
-        }
-        public override bool Equals(object? obj)
-        {
-            return (obj is null) ? base.Equals(obj) : GetHashCode() == obj.GetHashCode();
-        }
-        public override int GetHashCode()
-        {
-            var stringRepresentation = ToString();
-            if (stringRepresentation == null)
-            {
-                return 0;
-            }
-            return stringRepresentation.GetHashCode();
         }
         public override string ToString()
         {

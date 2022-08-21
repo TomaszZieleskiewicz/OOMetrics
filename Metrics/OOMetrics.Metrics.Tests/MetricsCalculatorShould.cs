@@ -50,9 +50,21 @@ namespace OOMetrics.Metrics.Tests
         {
             var provider = new SolutionDeclarationProvider($"{solutionLocation}", "OOMetrics");
             var declarations = await provider.GetDeclarations();
-            var calculator = new MetricsCalculator(declarations.ToList());
+            var options = new MetricsCalculatorOptions()
+            {
+                IgnoredDependencyNameSpaces = new[] { "System" }
+            };
+            var calculator = new MetricsCalculator(declarations.ToList(), options );
             calculator.AnalyzeData();
             var packages = calculator.Packages;
+            var totalDistance = packages.Sum(p => p.DistanceFromMainSequence);
+            // 2.7107142857142857142857142857M
+            // 2.5107142857142857142857142857M
+            // 1.5583333333333333333333333333M
+            // 1.5444444444444444444444444444M
+            // 0.8666666666666666666666666666M
+            // 0.9083333333333333333333333333M
+            // 0.3190476190476190476190476190M
         }
     }
 }

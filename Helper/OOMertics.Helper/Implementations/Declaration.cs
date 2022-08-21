@@ -2,14 +2,14 @@
 
 namespace OOMertics.Helper.Implementations
 {
-    public class Declaration : IDeclaration
+    public class Declaration : ComparableByStringHash, IDeclaration
     {
         public string Name { get; }
         public DeclarationType Type { get; }
         public string DeclarationNamespace { get; }
         public string ContainingPackage { get; }
         public ICollection<IDependency> Dependencies { get; } = new List<IDependency>();
-        public bool IsAbstract => Type == DeclarationType.INTERFACE_TYPE || Type == DeclarationType.ABSTRACT_CLASS_TYPE;
+        public bool IsAbstract => new[] { DeclarationType.INTERFACE_TYPE, DeclarationType.ENUM_TYPE, DeclarationType.ABSTRACT_CLASS_TYPE }.Contains(Type);
         public Declaration(string name, DeclarationType type, string declarationNamespace, string containingPackage)
         {
             Name = name;
@@ -24,19 +24,6 @@ namespace OOMertics.Helper.Implementations
         public IDependency ToDependency()
         {
             return new Dependency(Name, DeclarationNamespace, ContainingPackage);
-        }
-        public override bool Equals(object? obj)
-        {
-            return (obj is null) ? base.Equals(obj) : GetHashCode() == obj.GetHashCode();
-        }
-        public override int GetHashCode()
-        {
-            var stringRepresentation = ToString();
-            if(stringRepresentation == null)
-            {
-                return 0;
-            }
-            return stringRepresentation.GetHashCode();
         }
         public override string ToString()
         {
