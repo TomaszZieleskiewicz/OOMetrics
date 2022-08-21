@@ -43,7 +43,7 @@ namespace OOMertics.Helper.Implementations
             data = ReadFromFile(filePath);
         }
 
-        public ICollection<IDeclaration> GetDeclarations()
+        public async Task<ICollection<IDeclaration>> GetDeclarations()
         {
             return data;
         }

@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helper", "Helper", "{39A1B8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOMertics.Helper.Tests", "Helper\OOMertics.Helper.Tests\OOMertics.Helper.Tests.csproj", "{BF1A69B0-7B19-4721-AE1E-913B1B972603}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOMetrics.Visualizer", "Visualizer\OOMetrics.Visualizer\OOMetrics.Visualizer.csproj", "{C5466AEA-1EC5-4F90-9C2D-6EFD3EDA04F6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizer", "Visualizer", "{0312FE60-3481-41B4-8C95-44E315992B0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,10 @@ Global
 		{BF1A69B0-7B19-4721-AE1E-913B1B972603}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF1A69B0-7B19-4721-AE1E-913B1B972603}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF1A69B0-7B19-4721-AE1E-913B1B972603}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5466AEA-1EC5-4F90-9C2D-6EFD3EDA04F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5466AEA-1EC5-4F90-9C2D-6EFD3EDA04F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5466AEA-1EC5-4F90-9C2D-6EFD3EDA04F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5466AEA-1EC5-4F90-9C2D-6EFD3EDA04F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +54,7 @@ Global
 		{CFA59B21-0861-47E3-A745-E7E7C7F06203} = {9BE57367-CCBC-4729-B3D2-177BE7383B56}
 		{6F7FBE90-69FE-4C54-9BA5-A2A11BFD8A98} = {39A1B8C9-D3CC-467A-8D46-7B13E0F8387E}
 		{BF1A69B0-7B19-4721-AE1E-913B1B972603} = {39A1B8C9-D3CC-467A-8D46-7B13E0F8387E}
+		{C5466AEA-1EC5-4F90-9C2D-6EFD3EDA04F6} = {0312FE60-3481-41B4-8C95-44E315992B0A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4F8AB7A-9F73-4ED0-A902-B8BD72C78286}

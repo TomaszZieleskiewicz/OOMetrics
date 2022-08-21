@@ -8,8 +8,7 @@ namespace OOMertics.Helper.Tests
         public async void ProvideDeclarations()
         {
             var provider = new SolutionDeclarationProvider($"{solutionLocation}{testSolutionDir}", testSolutionName);
-            await provider.Load();
-            var declaraitons = provider.GetDeclarations();
+            var declaraitons = await provider.GetDeclarations();
             declaraitons.Count().Should().Be(18);
             var testClass = declaraitons.Where(declaration => declaration.Name == "ClassUsingTypesFromOtherProject").First();
 

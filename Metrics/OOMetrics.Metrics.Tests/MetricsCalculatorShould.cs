@@ -10,7 +10,7 @@ namespace OOMetrics.Metrics.Tests
         public async void AnalyzeData()
         {
             var provider = new JsonFileDataProvider("./TestData/testSolutionSerializedDependencies.json");
-            var declarations = provider.GetDeclarations();
+            var declarations = await provider.GetDeclarations();
             var calculator = new MetricsCalculator(declarations.ToList());
             calculator.AnalyzeData();
             var packages = calculator.Packages;
@@ -50,8 +50,7 @@ namespace OOMetrics.Metrics.Tests
         public async void AnalyzeThisSolution()
         {
             var provider = new SolutionDeclarationProvider($"{solutionLocation}", "OOMetrics");
-            await provider.Load();
-            var declarations = provider.GetDeclarations();
+            var declarations = await provider.GetDeclarations();
             var calculator = new MetricsCalculator(declarations.ToList());
             calculator.AnalyzeData();
             var packages = calculator.Packages;
