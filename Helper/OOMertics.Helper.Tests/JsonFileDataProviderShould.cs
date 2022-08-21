@@ -1,4 +1,5 @@
 ﻿using OOMertics.Helper.Implementations;
+using OOMetrics.Abstractions;
 
 namespace OOMertics.Helper.Tests
 {

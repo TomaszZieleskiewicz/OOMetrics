@@ -1,5 +1,4 @@
 ﻿using OOMetrics.Abstractions;
-using System.Xml.Linq;
 
 namespace OOMetrics.Metrics
 {
@@ -27,7 +26,7 @@ namespace OOMetrics.Metrics
                 foreach (var dependency in declaration.Dependencies.Where(d => CheckIfAdd(d, declaration.ContainingPackage)))
                 {
                     package.AddOutgoingDependency(dependency);
-                    if(CheckIfAddWhenFromOwnTests(declaration.ContainingPackage,dependency.ContainingPackage))
+                    if(CheckIfAddIncomingDependency(declaration.ContainingPackage,dependency.ContainingPackage))
                     {
                         var referencedPackage = RegisterPackage(dependency.ContainingPackage);
                         referencedPackage.AddIncomingDependency(declaration.ToDependency());
@@ -37,13 +36,15 @@ namespace OOMetrics.Metrics
             bool CheckIfAdd(IDependency dependency, string containingPackage)
             {
                 var isFromTheSamePackage = dependency.ContainingPackage == containingPackage;
-                var inIgnoredNamespace = Options.IgnoredDependencyNameSpaces.Contains(dependency.DependencyNamespace);
-
-                return !isFromTheSamePackage && !inIgnoredNamespace;
+                var inIgnoredNamespace = Options.IgnoredDependencyNamespaces.Contains(dependency.DependencyNamespace);
+                var returnValue = !(isFromTheSamePackage || inIgnoredNamespace);
+                return returnValue;
             }
-            bool CheckIfAddWhenFromOwnTests(string declarationPackage, string dependencyPackage)
+            bool CheckIfAddIncomingDependency(string declarationPackage, string dependencyPackage)
             {
-                return !(Options.ExcludeIncomingDependenciesFromTests && declarationPackage == $"{dependencyPackage}.Tests");
+                var excludedTestDependency = (Options.ExcludeIncomingDependenciesFromTests && declarationPackage == $"{dependencyPackage}.Tests");
+                var excludedIncoming = Options.IgnoredIncomingDependencyNamespaces.Contains(declarationPackage);
+                return !(excludedTestDependency || excludedIncoming);
             }
         }
         private Package RegisterPackage(string packageName)

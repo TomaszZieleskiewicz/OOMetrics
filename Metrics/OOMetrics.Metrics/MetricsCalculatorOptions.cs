@@ -2,7 +2,8 @@
 {
     public class MetricsCalculatorOptions
     {
-        public string[] IgnoredDependencyNameSpaces { get; init; } = Array.Empty<string>();
+        public string[] IgnoredDependencyNamespaces { get; init; } = Array.Empty<string>();
+        public string[] IgnoredIncomingDependencyNamespaces { get; init; } = Array.Empty<string>();
         public bool ExcludeIncomingDependenciesFromTests { get; init; } = true;
     }
 }

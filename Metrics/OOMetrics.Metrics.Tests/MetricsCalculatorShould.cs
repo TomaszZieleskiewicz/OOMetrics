@@ -1,5 +1,5 @@
 ﻿using OOMertics.Helper.Implementations;
-using OOMertics.Helper.Tests;
+using OOMetrics.Abstractions;
 
 namespace OOMetrics.Metrics.Tests
 {
@@ -52,7 +52,8 @@ namespace OOMetrics.Metrics.Tests
             var declarations = await provider.GetDeclarations();
             var options = new MetricsCalculatorOptions()
             {
-                IgnoredDependencyNameSpaces = new[] { "System" }
+                IgnoredDependencyNamespaces = new[] { "System" },
+                IgnoredIncomingDependencyNamespaces = new[] { "OOMetrics.Metrics.Tests" }
             };
             var calculator = new MetricsCalculator(declarations.ToList(), options );
             calculator.AnalyzeData();
@@ -65,6 +66,8 @@ namespace OOMetrics.Metrics.Tests
             // 0.8666666666666666666666666666M
             // 0.9083333333333333333333333333M
             // 0.3190476190476190476190476190M
+            // 0.2857142857142857142857142857M
+            // 0.1666666666666666666666666667M
         }
     }
 }
