@@ -6,9 +6,7 @@ namespace OOMertics.Helper.Implementations
     {
         public string Name { get; }
         public string DependencyNamespace { get; }
-
         public string ContainingAssembly { get; }
-
         public Dependency(string name, string dependencyNamespace, string containingAssembly)
         {
             Name = name;

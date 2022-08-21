@@ -9,6 +9,7 @@ namespace OOMertics.Helper.Implementations
         public string DeclarationNamespace { get; }
         public string ContainingAssembly { get; }
         public ICollection<IDependency> Dependencies { get; private set; }
+        public bool IsAbstract => Type == DeclarationType.INTERFACE_TYPE || Type == DeclarationType.ABSTRACT_CLASS_TYPE;
         public Declaration(string name, DeclarationType type, string declarationNamespace, string containingAssembly)
         {
             Name = name;

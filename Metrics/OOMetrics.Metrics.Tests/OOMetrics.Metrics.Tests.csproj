@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Helper\OOMertics.Helper.Tests\OOMertics.Helper.Tests.csproj" />
     <ProjectReference Include="..\..\Helper\OOMertics.Helper\OOMertics.Helper.csproj" />
     <ProjectReference Include="..\OOMetrics.Metrics\OOMetrics.Metrics.csproj" />
   </ItemGroup>

@@ -11,7 +11,7 @@ namespace OOMetrics.Metrics.Models
         public ICollection<IDependency> Dependencies { get; }
         public string ContainingAssembly { get; }
 
-        public bool isAbstract => Type == DeclarationType.INTERFACE_TYPE || Type == DeclarationType.ABSTRACT_CLASS_TYPE;
+        public bool IsAbstract => Type == DeclarationType.INTERFACE_TYPE || Type == DeclarationType.ABSTRACT_CLASS_TYPE;
 
         public Declaration(string name, DeclarationType type, string declarationNamespace, List<IDependency> dependencies)
         {

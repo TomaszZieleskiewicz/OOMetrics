@@ -5,9 +5,7 @@ namespace OOMetrics.Metrics.Models
     public class Dependency : IDependency
     {
         public string Name { get; }
-
         public string DependencyNamespace { get; }
-
         public string ContainingAssembly { get; }
         public Dependency(string name, string dependencyNamespace, string containingAssembly)
         {

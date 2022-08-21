@@ -9,5 +9,6 @@ namespace OOMetrics.Metrics.Interfaces
         string DeclarationNamespace { get; }
         string ContainingAssembly { get; }
         ICollection<IDependency> Dependencies { get; }
+        public bool IsAbstract { get; }
     }
 }
