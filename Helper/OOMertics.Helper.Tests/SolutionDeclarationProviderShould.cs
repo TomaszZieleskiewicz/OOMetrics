@@ -1,4 +1,5 @@
 ﻿using OOMertics.Helper.Implementations;
+using OOMetrics.Abstractions;
 
 namespace OOMertics.Helper.Tests
 {
@@ -15,13 +16,13 @@ namespace OOMertics.Helper.Tests
             testClass.Dependencies.Count().Should().Be(5);
             testClass.Type.Should().Be(DeclarationType.CLASS_TYPE);
             testClass.DeclarationNamespace.Should().Be("OtherTestProject");
-            testClass.ContainingAssembly.Should().Be("OtherTestProject");
+            testClass.ContainingPackage.Should().Be("OtherTestProject");
 
             var abstractClass = declaraitons.Where(declaration => declaration.Name == "AbstractClass").First();
             abstractClass.Dependencies.Count().Should().Be(1);
             abstractClass.Type.Should().Be(DeclarationType.ABSTRACT_CLASS_TYPE);
             abstractClass.DeclarationNamespace.Should().Be("AbstractStableProject");
-            abstractClass.ContainingAssembly.Should().Be("AbstractStableProject");
+            abstractClass.ContainingPackage.Should().Be("AbstractStableProject");
         }
     }
 }

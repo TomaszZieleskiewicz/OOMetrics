@@ -1,4 +1,4 @@
-﻿namespace OOMertics.Helper
+﻿namespace OOMetrics.Abstractions
 {
     public enum DeclarationType
     {

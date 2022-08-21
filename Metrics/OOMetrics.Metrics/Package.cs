@@ -1,6 +1,6 @@
-﻿using OOMetrics.Metrics.Interfaces;
+﻿using OOMetrics.Abstractions;
 
-namespace OOMetrics.Metrics.Models
+namespace OOMetrics.Metrics
 {
     public class Package
     {
@@ -8,7 +8,7 @@ namespace OOMetrics.Metrics.Models
         public int EfferenCoupling { get => OutgoingDependencies.Count(); }
         public int AfferenCoupling { get => IncomingDependencies.Count(); }
         public decimal Instability { get => SafeDivide(EfferenCoupling, EfferenCoupling + AfferenCoupling); }
-        public decimal Abstractness { get => SafeDivide(Declarations.Where(d=>d.IsAbstract).Count(), Declarations.Count()); }
+        public decimal Abstractness { get => SafeDivide(Declarations.Where(d => d.IsAbstract).Count(), Declarations.Count()); }
         public decimal DistanceFromMainSequence { get => Math.Abs(Instability + Abstractness - 1); }
         public ICollection<IDeclaration> Declarations { get; } = new List<IDeclaration>();
         public ICollection<IDependency> OutgoingDependencies { get; private set; } = new List<IDependency>();
@@ -31,25 +31,25 @@ namespace OOMetrics.Metrics.Models
         }
         public override string ToString()
         {
-            return Name;
+            return $"{Name} ({DistanceFromMainSequence})";
         }
-        private void AddIfNew<T>(ICollection<T> list, T dependency)
+        private static void AddIfNew<T>(ICollection<T> list, T dependency)
         {
-            var isNew = list.Where(d => d.Equals(dependency)).Count() == 0;
+            var isNew = !list.Any(d => d != null && d.Equals(dependency));
             if (isNew)
             {
                 list.Add(dependency);
             }
         }
-        private decimal SafeDivide(int a, int b)
+        private static decimal SafeDivide(int a, int b)
         {
-            if(b == 0)
+            if (b == 0)
             {
                 return 0;
-            } 
+            }
             else
             {
-                return Decimal.Divide(a, b);
+                return decimal.Divide(a, b);
             }
         }
     }

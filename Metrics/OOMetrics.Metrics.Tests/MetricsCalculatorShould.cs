@@ -1,10 +1,9 @@
 ﻿using OOMertics.Helper.Implementations;
 using OOMertics.Helper.Tests;
-using System.IO;
 
 namespace OOMetrics.Metrics.Tests
 {
-    public class MetricsCalculatorShould: TestBase
+    public class MetricsCalculatorShould : TestBase
     {
         [Fact]
         public async void AnalyzeData()
@@ -23,14 +22,14 @@ namespace OOMetrics.Metrics.Tests
             testProject.EfferenCoupling.Should().Be(0);
             testProject.AfferenCoupling.Should().Be(3);
             testProject.Instability.Should().Be(0);
-            testProject.Abstractness.Should().BeApproximately(0.166M,3);
-            testProject.DistanceFromMainSequence.Should().BeApproximately(0.833M,3);
+            testProject.Abstractness.Should().BeApproximately(0.166M, 3);
+            testProject.DistanceFromMainSequence.Should().BeApproximately(0.833M, 3);
 
             var otherTestProject = packages.Where(p => p.Name == "OtherTestProject").First();
             otherTestProject.Declarations.Count().Should().Be(4);
-            otherTestProject.IncomingDependencies.Should().BeEmpty(); 
-            otherTestProject.OutgoingDependencies.Count().Should().Be(6);
-            otherTestProject.EfferenCoupling.Should().Be(6);
+            otherTestProject.IncomingDependencies.Should().BeEmpty();
+            otherTestProject.OutgoingDependencies.Count().Should().Be(4);
+            otherTestProject.EfferenCoupling.Should().Be(4);
             otherTestProject.AfferenCoupling.Should().Be(0);
             otherTestProject.Instability.Should().Be(1);
             otherTestProject.Abstractness.Should().BeApproximately(0, 3);

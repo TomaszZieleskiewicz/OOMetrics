@@ -1,5 +1,4 @@
-﻿using OOMetrics.Metrics.Interfaces;
-using OOMetrics.Metrics.Models;
+﻿using OOMetrics.Abstractions;
 
 namespace OOMetrics.Metrics
 {
@@ -15,15 +14,14 @@ namespace OOMetrics.Metrics
         {
             foreach (var declaration in RawData)
             {
-                var package = RegisterPackage(declaration.ContainingAssembly);
+                var package = RegisterPackage(declaration.ContainingPackage);
                 package.AddDeclaration(declaration);
 
-                foreach (var dependency in declaration.Dependencies.Where(d=> d.ContainingAssembly != declaration.ContainingAssembly))
+                foreach (var dependency in declaration.Dependencies.Where(d => d.ContainingPackage != declaration.ContainingPackage))
                 {
                     package.AddOutgoingDependency(dependency);
-                    var referencedPackage = RegisterPackage(dependency.ContainingAssembly);
-                    var incomingDependency = new Dependency(declaration.Name, declaration.DeclarationNamespace, declaration.ContainingAssembly);
-                    referencedPackage.AddIncomingDependency(incomingDependency);
+                    var referencedPackage = RegisterPackage(dependency.ContainingPackage);
+                    referencedPackage.AddIncomingDependency(declaration.ToDependency());
                 }
             }
         }

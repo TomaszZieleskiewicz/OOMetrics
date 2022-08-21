@@ -6,6 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Abstractions\OOMetrics.Abstractions\OOMetrics.Abstractions.csproj" />
+    </ItemGroup>
+
 
 
 </Project>

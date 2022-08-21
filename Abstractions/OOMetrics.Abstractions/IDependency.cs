@@ -1,9 +1,9 @@
-﻿namespace OOMetrics.Metrics.Interfaces
+﻿namespace OOMetrics.Abstractions
 {
     public interface IDependency
     {
         string Name { get; }
         string DependencyNamespace { get; }
-        string ContainingAssembly { get; }
+        string ContainingPackage { get; }
     }
 }

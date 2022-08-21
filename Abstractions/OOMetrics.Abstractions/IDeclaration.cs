@@ -1,14 +1,13 @@
-﻿using OOMertics.Helper;
-
-namespace OOMetrics.Metrics.Interfaces
+﻿namespace OOMetrics.Abstractions
 {
     public interface IDeclaration
     {
         string Name { get; }
         DeclarationType Type { get; }
         string DeclarationNamespace { get; }
-        string ContainingAssembly { get; }
+        string ContainingPackage { get; }
+        bool IsAbstract { get; }
         ICollection<IDependency> Dependencies { get; }
-        public bool IsAbstract { get; }
+        IDependency ToDependency();
     }
 }

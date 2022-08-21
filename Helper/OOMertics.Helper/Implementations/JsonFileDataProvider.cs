@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using OOMetrics.Metrics.Interfaces;
+using OOMetrics.Abstractions;
 
 namespace OOMertics.Helper.Implementations
 {
@@ -43,9 +43,8 @@ namespace OOMertics.Helper.Implementations
             data = ReadFromFile(filePath);
         }
 
-        public async Task<ICollection<IDeclaration>> GetDeclarations()
-        {
-            return data;
-        }
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+        public async Task<ICollection<IDeclaration>> GetDeclarations() => data;
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
     }
 }

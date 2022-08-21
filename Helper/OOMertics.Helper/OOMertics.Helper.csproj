@@ -12,6 +12,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Abstractions\OOMetrics.Abstractions\OOMetrics.Abstractions.csproj" />
 	  <ProjectReference Include="..\..\Metrics\OOMetrics.Metrics\OOMetrics.Metrics.csproj" />
 	</ItemGroup>
 </Project>
