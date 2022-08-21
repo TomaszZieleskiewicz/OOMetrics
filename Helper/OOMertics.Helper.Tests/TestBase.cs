@@ -1,6 +1,4 @@
-﻿using OOMertics.Helper.Handlers;
-
-namespace OOMertics.Helper.Tests
+﻿namespace OOMertics.Helper.Tests
 {
     public abstract class TestBase
     {

@@ -2,7 +2,7 @@ using OOMertics.Helper.Handlers;
 
 namespace OOMertics.Helper.Tests
 {
-    public class SolutionHandlerShould: TestBase
+    public class SolutionHandlerShould : TestBase
     {
         private async Task<SolutionHandler> LoadTestSolution()
         {
@@ -21,7 +21,7 @@ namespace OOMertics.Helper.Tests
         {
             var solutionHandler = await LoadTestSolution();
             var projects = solutionHandler.Projects;
-            projects.Count.Should().Be(2);
+            projects.Count.Should().Be(3);
             projects.Where(p => p.AssemblyName == "TestProject").Count().Should().Be(1);
             projects.Where(p => p.AssemblyName == "OtherTestProject").Count().Should().Be(1);
 
@@ -40,6 +40,7 @@ namespace OOMertics.Helper.Tests
             var solutionHandler = await LoadTestSolution();
             var testProject = solutionHandler.Projects.Where(p => p.AssemblyName == "TestProject").First();
             var otherTestProject = solutionHandler.Projects.Where(p => p.AssemblyName == "OtherTestProject").First();
+            var abstractStableProject = solutionHandler.Projects.Where(p => p.AssemblyName == "AbstractStableProject").First();
 
             var simpleClassDocument = testProject.Documents.Where(p => p.ToString() == "SimpleClass.cs").First();
             var simpleClassDeclaration = simpleClassDocument.Declarations.First();
@@ -54,6 +55,12 @@ namespace OOMertics.Helper.Tests
             classWithInterfaceDeclaration.Namespace.Should().Be("TestProject"); ;
             classWithInterfaceDeclaration.Type.Should().Be(DeclarationType.CLASS_TYPE);
             classWithInterfaceDeclaration.Dependencies.Where(d => d.ContainingNamespace.Name == "TestProject").Count().Should().Be(1);
+
+            var abstractClass = abstractStableProject.Documents.Where(p => p.ToString() == "AbstractClass.cs").First();
+            var abstractClassDeclaration = abstractClass.Declarations.First();
+            abstractClassDeclaration.Name.Should().Be("AbstractClass");
+            abstractClassDeclaration.Namespace.Should().Be("AbstractStableProject"); ;
+            abstractClassDeclaration.Type.Should().Be(DeclarationType.ABSTRACT_CLASS_TYPE);
         }
     }
 }

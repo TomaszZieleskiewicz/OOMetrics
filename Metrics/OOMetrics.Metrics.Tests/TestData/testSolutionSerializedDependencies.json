@@ -4,97 +4,381 @@
     "Name": "ClassWithInterface",
     "Type": 1,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Interface",
+        "DependencyNamespace": "TestProject",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Void",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Int32",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "NotImplementedException",
+        "DependencyNamespace": "",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Object",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "ClassWithParent",
     "Type": 1,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "SimpleClass",
+        "DependencyNamespace": "TestProject",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "ClassWithParentAndInterface",
     "Type": 1,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "SimpleClass",
+        "DependencyNamespace": "TestProject",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Interface",
+        "DependencyNamespace": "TestProject",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Void",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Int32",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Object",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "Enum",
     "Type": 0,
     "DeclarationNamespace": "TestProject",
+    "ContainingAssembly": "TestProject",
     "Dependencies": []
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "Interface",
-    "Type": 2,
+    "Type": 3,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Void",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Int32",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Object",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "AnotherRecord",
-    "Type": 3,
+    "Type": 4,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "AnotherInterface",
-    "Type": 2,
+    "Type": 3,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Void",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Int32",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Object",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "AnotherSimpleClass",
     "Type": 1,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "AnotherInterface",
+        "DependencyNamespace": "TestProject",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Void",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Int32",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "NotImplementedException",
+        "DependencyNamespace": "",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Object",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "AnotherStruct",
-    "Type": 4,
+    "Type": 5,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Double",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "Record",
-    "Type": 3,
+    "Type": 4,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "SimpleClass",
     "Type": 1,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Int32",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Decimal",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "",
+        "DependencyNamespace": "",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "Struct",
-    "Type": 4,
+    "Type": 5,
     "DeclarationNamespace": "TestProject",
-    "Dependencies": []
+    "ContainingAssembly": "TestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Double",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "ClassUsingTypesFromOtherProject",
     "Type": 1,
     "DeclarationNamespace": "OtherTestProject",
-    "Dependencies": []
+    "ContainingAssembly": "OtherTestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "AbstractClass",
+        "DependencyNamespace": "AbstractStableProject",
+        "ContainingAssembly": "AbstractStableProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "SimpleClass",
+        "DependencyNamespace": "OtherTestProject",
+        "ContainingAssembly": "OtherTestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "SimpleClass",
+        "DependencyNamespace": "TestProject",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Struct",
+        "DependencyNamespace": "TestProject",
+        "ContainingAssembly": "TestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Enum",
+        "DependencyNamespace": "TestProject",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "ClassWithoutDependencies",
     "Type": 1,
     "DeclarationNamespace": "OtherTestProject",
+    "ContainingAssembly": "OtherTestProject",
     "Dependencies": []
   },
   {
@@ -102,13 +386,77 @@
     "Name": "ClassWithParentThatUsesOtherTypes",
     "Type": 1,
     "DeclarationNamespace": "OtherTestProject",
-    "Dependencies": []
+    "ContainingAssembly": "OtherTestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "ClassUsingTypesFromOtherProject",
+        "DependencyNamespace": "OtherTestProject",
+        "ContainingAssembly": "OtherTestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "SimpleClass",
+        "DependencyNamespace": "OtherTestProject",
+        "ContainingAssembly": "OtherTestProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "SimpleClass",
+        "DependencyNamespace": "TestProject",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
   },
   {
     "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
     "Name": "SimpleClass",
     "Type": 1,
     "DeclarationNamespace": "OtherTestProject",
-    "Dependencies": []
+    "ContainingAssembly": "OtherTestProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "Enum",
+        "DependencyNamespace": "TestProject",
+        "ContainingAssembly": "TestProject"
+      }
+    ]
+  },
+  {
+    "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
+    "Name": "AbstractClass",
+    "Type": 2,
+    "DeclarationNamespace": "AbstractStableProject",
+    "ContainingAssembly": "AbstractStableProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "String",
+        "DependencyNamespace": "System",
+        "ContainingAssembly": "AbstractStableProject"
+      }
+    ]
+  },
+  {
+    "$type": "OOMertics.Helper.Implementations.Declaration, OOMertics.Helper",
+    "Name": "AnotherAbstractClass",
+    "Type": 2,
+    "DeclarationNamespace": "AbstractStableProject",
+    "ContainingAssembly": "AbstractStableProject",
+    "Dependencies": [
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "AbstractClass",
+        "DependencyNamespace": "AbstractStableProject",
+        "ContainingAssembly": "AbstractStableProject"
+      },
+      {
+        "$type": "OOMertics.Helper.Implementations.Dependency, OOMertics.Helper",
+        "Name": "DateTime",
+        "DependencyNamespace": "",
+        "ContainingAssembly": "AbstractStableProject"
+      }
+    ]
   }
 ]

@@ -33,4 +33,6 @@
     </None>
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties testdata_4testsolutionserializeddependencies_1json__JsonSchema="https://goreleaser.com/static/schema.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

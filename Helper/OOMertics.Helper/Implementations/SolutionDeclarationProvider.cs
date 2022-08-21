@@ -17,9 +17,9 @@ namespace OOMertics.Helper.Implementations
         {
             solutionHandler = await SolutionHandler.OpenAsync(path, solutionName);
         }
-        public IEnumerable<IDeclaration> GetDeclarations()
+        public ICollection<IDeclaration> GetDeclarations()
         {
-            if(solutionHandler == null)
+            if (solutionHandler == null)
             {
                 throw new Exception("Solution handler not loaded. Call Load first.");
             }
@@ -30,10 +30,10 @@ namespace OOMertics.Helper.Implementations
                 {
                     foreach (var rawDeclaration in document.Declarations)
                     {
-                        var declaration = new Declaration(rawDeclaration.Name, rawDeclaration.Type, rawDeclaration.Namespace);
+                        var declaration = new Declaration(rawDeclaration.Name, rawDeclaration.Type, rawDeclaration.Namespace, project.AssemblyName);
                         foreach (var dependency in rawDeclaration.Dependencies)
                         {
-                            declaration.AddDependency(new Dependency(dependency.Name, dependency.ContainingNamespace.Name));
+                            declaration.AddDependency(new Dependency(dependency.Name, dependency.ContainingNamespace.Name, dependency.ContainingAssembly.Name));
                         }
                         declarations.Add(declaration);
                     }

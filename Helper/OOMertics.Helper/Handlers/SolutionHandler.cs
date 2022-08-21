@@ -1,7 +1,6 @@
 ﻿using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.MSBuild;
-using OOMetrics.Metrics.Interfaces;
 
 namespace OOMertics.Helper.Handlers
 {
@@ -11,7 +10,7 @@ namespace OOMertics.Helper.Handlers
         private static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
 
         public readonly List<ProjectHandler> Projects;
-        
+
         private SolutionHandler(Workspace workspace, List<ProjectHandler> projects)
         {
             Workspace = workspace;

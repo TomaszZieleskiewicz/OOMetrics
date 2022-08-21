@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace OOMertics.Helper.Handlers
@@ -24,7 +25,8 @@ namespace OOMertics.Helper.Handlers
                     break;
                 case ClassDeclarationSyntax classDeclaration:
                     Name = classDeclaration.Identifier.ToString();
-                    Type = DeclarationType.CLASS_TYPE;
+                    var isAbstract = classDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.AbstractKeyword));
+                    Type = isAbstract ? DeclarationType.ABSTRACT_CLASS_TYPE : DeclarationType.CLASS_TYPE;
                     break;
                 case InterfaceDeclarationSyntax interfaceDeclaration:
                     Name = interfaceDeclaration.Identifier.ToString();

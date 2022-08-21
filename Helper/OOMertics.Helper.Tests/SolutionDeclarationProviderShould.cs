@@ -1,8 +1,4 @@
 ﻿using OOMertics.Helper.Implementations;
-using OOMetrics.Metrics.Interfaces;
-using Newtonsoft.Json;
-using OOMetrics.Metrics.Models;
-using System.IO;
 
 namespace OOMertics.Helper.Tests
 {
@@ -14,11 +10,19 @@ namespace OOMertics.Helper.Tests
             var provider = new SolutionDeclarationProvider($"{solutionLocation}{testSolutionDir}", testSolutionName);
             await provider.Load();
             var declaraitons = provider.GetDeclarations();
-            declaraitons.Count().Should().Be(16);
+            declaraitons.Count().Should().Be(18);
+            var testClass = declaraitons.Where(declaration => declaration.Name == "ClassUsingTypesFromOtherProject").First();
 
-            JsonFileDataProvider.DumpIntoFile("./TestData/testSolutionSerializedDependencies.json", declaraitons);
-            var referenceData = JsonFileDataProvider.ReadFromFile("./TestData/testSolutionSerializedDependencies.json");
-            declaraitons.Should().BeEquivalentTo(referenceData);
+            testClass.Dependencies.Count().Should().Be(5);
+            testClass.Type.Should().Be(DeclarationType.CLASS_TYPE);
+            testClass.DeclarationNamespace.Should().Be("OtherTestProject");
+            testClass.ContainingAssembly.Should().Be("OtherTestProject");
+
+            var abstractClass = declaraitons.Where(declaration => declaration.Name == "AbstractClass").First();
+            abstractClass.Dependencies.Count().Should().Be(1);
+            abstractClass.Type.Should().Be(DeclarationType.ABSTRACT_CLASS_TYPE);
+            abstractClass.DeclarationNamespace.Should().Be("AbstractStableProject");
+            abstractClass.ContainingAssembly.Should().Be("AbstractStableProject");
         }
     }
 }

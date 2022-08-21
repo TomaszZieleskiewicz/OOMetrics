@@ -7,6 +7,7 @@ namespace OOMetrics.Metrics.Interfaces
         string Name { get; }
         DeclarationType Type { get; }
         string DeclarationNamespace { get; }
-        IEnumerable<IDependency> Dependencies { get; }
+        string ContainingAssembly { get; }
+        ICollection<IDependency> Dependencies { get; }
     }
 }

@@ -1,8 +1,9 @@
-﻿using TestProject;
+﻿using AbstractStableProject;
+using TestProject;
 
 namespace OtherTestProject
 {
-    public class ClassUsingTypesFromOtherProject
+    public class ClassUsingTypesFromOtherProject: AbstractClass
     {
         public SimpleClass ClassA;
         public TestProject.SimpleClass ClassB;

@@ -3,6 +3,7 @@
     public interface IDependency
     {
         string Name { get; }
-        string Namespace { get; }
+        string DependencyNamespace { get; }
+        string ContainingAssembly { get; }
     }
 }

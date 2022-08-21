@@ -5,7 +5,7 @@ namespace OOMertics.Helper.Implementations
 {
     public class JsonFileDataProvider
     {
-        public static void DumpIntoFile(string path, IEnumerable<IDeclaration> data)
+        public static void DumpIntoFile(string path, ICollection<IDeclaration> data)
         {
             JsonSerializer serializer = new JsonSerializer();
             serializer.NullValueHandling = NullValueHandling.Ignore;
@@ -15,10 +15,10 @@ namespace OOMertics.Helper.Implementations
             using (StreamWriter sw = new StreamWriter(path))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
-                serializer.Serialize(writer, data, typeof(IEnumerable<IDeclaration>));
+                serializer.Serialize(writer, data, typeof(ICollection<IDeclaration>));
             }
         }
-        public static IEnumerable<IDeclaration> ReadFromFile(string path)
+        public static ICollection<IDeclaration> ReadFromFile(string path)
         {
             var settings = new JsonSerializerSettings
             {
@@ -30,21 +30,20 @@ namespace OOMertics.Helper.Implementations
             {
                 throw new Exception($"No data in {path} found.");
             }
-            var potentialData = JsonConvert.DeserializeObject<IEnumerable<IDeclaration>>(jsonFileData, settings);
+            var potentialData = JsonConvert.DeserializeObject<ICollection<IDeclaration>>(jsonFileData, settings);
             if (potentialData is null)
             {
                 throw new Exception($"Can not serialize {path} to List<IDeclaration> containing {jsonFileData}");
             }
             return potentialData;
         }
-        private readonly IEnumerable<IDeclaration> data;
+        private readonly ICollection<IDeclaration> data;
         public JsonFileDataProvider(string filePath)
         {
-            var potentialData = ReadFromFile(filePath);
-            data = potentialData.Cast<IDeclaration>();
+            data = ReadFromFile(filePath);
         }
 
-        public IEnumerable<IDeclaration> GetDeclarations()
+        public ICollection<IDeclaration> GetDeclarations()
         {
             return data;
         }

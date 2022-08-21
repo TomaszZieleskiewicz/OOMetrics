@@ -2,6 +2,6 @@
 {
     public interface IDeclarationProvider
     {
-        IEnumerable<IDeclaration> GetDeclarations();
+        ICollection<IDeclaration> GetDeclarations();
     }
 }

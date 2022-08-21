@@ -21,7 +21,7 @@ namespace OOMertics.Helper.Handlers
                 throw new ArgumentException($"Document {document.Name} is not supporting syntax tree");
             }
             var semanticModel = await document.GetSemanticModelAsync();
-            if (semanticModel is  null)
+            if (semanticModel is null)
             {
                 throw new ArgumentException($"Document {document.Name} semantic model is null");
             }

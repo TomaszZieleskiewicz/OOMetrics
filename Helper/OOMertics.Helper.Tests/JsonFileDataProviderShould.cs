@@ -1,9 +1,8 @@
 ﻿using OOMertics.Helper.Implementations;
-using OOMetrics.Metrics.Interfaces;
 
 namespace OOMertics.Helper.Tests
 {
-    public class JsonFileDataProviderShould
+    public class JsonFileDataProviderShould : TestBase
     {
         [Fact]
         public async void ReadFromValidFile()
@@ -11,6 +10,18 @@ namespace OOMertics.Helper.Tests
             var provider = new JsonFileDataProvider("./TestData/testSolutionSerializedDependencies.json");
             var data = provider.GetDeclarations().ToList();
             data.Count.Should().BeGreaterThan(0);
+        }
+        [Fact]
+        public async void ProperlySaveAndReadFromFile()
+        {
+            var provider = new SolutionDeclarationProvider($"{solutionLocation}{testSolutionDir}", testSolutionName);
+            await provider.Load();
+            var declaraitons = provider.GetDeclarations();
+
+            JsonFileDataProvider.DumpIntoFile("./TestData/SolutionDeclarationProviderShould.ProvideDeclarations.json", declaraitons);
+            var referenceData = JsonFileDataProvider.ReadFromFile("./TestData/SolutionDeclarationProviderShould.ProvideDeclarations.json");
+
+            declaraitons.Should().BeEquivalentTo(referenceData, o => o.WithStrictOrdering());
         }
     }
 }
