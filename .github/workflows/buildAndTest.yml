@@ -19,11 +19,6 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
     steps:
-    - name: Print github event
-      env:
-        EVENT_CONTEXT: ${{ toJSON(github.event) }}
-      run: |
-        echo $EVENT_CONTEXT    
     - name: Checkout
       uses: actions/checkout@v3
     - name: Setup .NET
@@ -35,4 +30,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage"
+    - name: Code coverage
+      uses: codecov/codecov-action@v3
+     
