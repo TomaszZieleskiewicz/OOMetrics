@@ -4,12 +4,13 @@ namespace OOMertics.Helper.Implementations
 {
     public class Declaration : ComparableByStringHash, IDeclaration
     {
+        private static readonly DeclarationType[] AbstractTypes = new[] { DeclarationType.INTERFACE_TYPE, DeclarationType.ENUM_TYPE, DeclarationType.ABSTRACT_CLASS_TYPE };
         public string Name { get; }
         public DeclarationType Type { get; }
         public string DeclarationNamespace { get; }
         public string ContainingPackage { get; }
         public ICollection<IDependency> Dependencies { get; } = new List<IDependency>();
-        public bool IsAbstract => new[] { DeclarationType.INTERFACE_TYPE, DeclarationType.ENUM_TYPE, DeclarationType.ABSTRACT_CLASS_TYPE }.Contains(Type);
+        public bool IsAbstract => AbstractTypes.Contains(Type);
         public Declaration(string name, DeclarationType type, string declarationNamespace, string containingPackage)
         {
             Name = name;
