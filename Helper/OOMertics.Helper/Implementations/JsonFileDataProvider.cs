@@ -22,7 +22,7 @@ namespace OOMertics.Helper.Implementations
             {
                 serializer.Serialize(writer, data, typeof(ICollection<IDeclaration>));
             }
-        }
+        } 
         public static ICollection<IDeclaration> ReadFromFile(string path)
         {
             var settings = new JsonSerializerSettings
