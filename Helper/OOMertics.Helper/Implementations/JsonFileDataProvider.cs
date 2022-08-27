@@ -30,17 +30,18 @@ namespace OOMertics.Helper.Implementations
                 TypeNameHandling = TypeNameHandling.Auto,
                 NullValueHandling = NullValueHandling.Ignore,
             };
-            var jsonFileData = File.ReadAllText(path);
-            if (jsonFileData == null)
+            try
             {
-                throw new Exception($"No data in {path} found.");
+                var jsonFileData = File.ReadAllText(path) ?? string.Empty;
+                var potentialData = JsonConvert.DeserializeObject<ICollection<IDeclaration>>(jsonFileData, settings);
+#pragma warning disable CS8603 // Possible null reference return.
+                return potentialData;
+#pragma warning restore CS8603 // Possible null reference return.
             }
-            var potentialData = JsonConvert.DeserializeObject<ICollection<IDeclaration>>(jsonFileData, settings);
-            if (potentialData is null)
+            catch (Exception ex)
             {
-                throw new Exception($"Can not serialize {path} to List<IDeclaration> containing {jsonFileData}");
+                throw new Exception($"Can not read declarations from {path} due to: {ex.Message}", ex);
             }
-            return potentialData;
         }
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task<ICollection<IDeclaration>> GetDeclarations() => data;

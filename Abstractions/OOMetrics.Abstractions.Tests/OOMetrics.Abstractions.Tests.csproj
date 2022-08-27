@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -22,26 +22,8 @@
 		</PackageReference>
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\OOMertics.Helper\OOMertics.Helper.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="TestData\someJsonObjectCollection.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="TestData\someJsonObject.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="TestData\wrongFormat.txt">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="TestData\emptyfile.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	  <None Update="TestData\testSolutionSerializedDependencies.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OOMetrics.Abstractions\OOMetrics.Abstractions.csproj" />
+  </ItemGroup>
 
 </Project>

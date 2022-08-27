@@ -2,6 +2,7 @@
 {
     public abstract class ComparableByStringHash
     {
+        public abstract override string ToString();
         public override bool Equals(object? obj)
         {
             return (obj is null) ? base.Equals(obj) : GetHashCode() == obj.GetHashCode();
