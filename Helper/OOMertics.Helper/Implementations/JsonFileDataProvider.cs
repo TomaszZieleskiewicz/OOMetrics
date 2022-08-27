@@ -34,9 +34,11 @@ namespace OOMertics.Helper.Implementations
             {
                 var jsonFileData = File.ReadAllText(path) ?? string.Empty;
                 var potentialData = JsonConvert.DeserializeObject<ICollection<IDeclaration>>(jsonFileData, settings);
-#pragma warning disable CS8603 // Possible null reference return.
+                if(potentialData == null)
+                {
+                    throw new Exception($"Serialization of: {jsonFileData} resulted in null.");
+                }
                 return potentialData;
-#pragma warning restore CS8603 // Possible null reference return.
             }
             catch (Exception ex)
             {
