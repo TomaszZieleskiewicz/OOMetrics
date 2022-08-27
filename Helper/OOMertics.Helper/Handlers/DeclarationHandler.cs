@@ -1,7 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using OOMetrics.Abstractions;
+using OOMetrics.Abstractions.Enums;
 
 namespace OOMertics.Helper.Handlers
 {

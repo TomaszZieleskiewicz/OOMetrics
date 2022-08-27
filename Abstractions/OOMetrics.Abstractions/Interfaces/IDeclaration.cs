@@ -1,6 +1,8 @@
-﻿namespace OOMetrics.Abstractions
+﻿using OOMetrics.Abstractions.Enums;
+
+namespace OOMetrics.Abstractions.Interfaces
 {
-    public interface IDeclaration
+    public interface IDeclaration : IComparableByStringHash
     {
         string Name { get; }
         DeclarationType Type { get; }

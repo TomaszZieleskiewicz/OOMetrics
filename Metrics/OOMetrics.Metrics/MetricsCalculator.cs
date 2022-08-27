@@ -1,4 +1,4 @@
-﻿using OOMetrics.Abstractions;
+﻿using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMetrics.Metrics
 {

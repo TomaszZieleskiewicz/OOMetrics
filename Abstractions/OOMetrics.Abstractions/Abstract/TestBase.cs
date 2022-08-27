@@ -1,4 +1,4 @@
-﻿namespace OOMetrics.Abstractions
+﻿namespace OOMetrics.Abstractions.Abstract
 {
     public abstract class TestBase
     {

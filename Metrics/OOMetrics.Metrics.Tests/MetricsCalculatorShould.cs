@@ -1,5 +1,5 @@
 ﻿using OOMertics.Helper.Implementations;
-using OOMetrics.Abstractions;
+using OOMetrics.Abstractions.Abstract;
 
 namespace OOMetrics.Metrics.Tests
 {
@@ -59,6 +59,7 @@ namespace OOMetrics.Metrics.Tests
             calculator.AnalyzeData();
             var packages = calculator.Packages;
             var totalDistance = packages.Sum(p => p.DistanceFromMainSequence);
+            totalDistance.Should().BeLessThanOrEqualTo(0.167M);
             // 2.7107142857142857142857142857M
             // 2.5107142857142857142857142857M
             // 1.5583333333333333333333333333M
