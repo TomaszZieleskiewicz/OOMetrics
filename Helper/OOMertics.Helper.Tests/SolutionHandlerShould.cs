@@ -29,7 +29,7 @@ namespace OOMertics.Helper.Tests
 
             var testProjest = projects.Where(p => p.AssemblyName == "TestProject").Single();
             testProjest.Documents.Where(p => p.ToString() == "ClassWithInterface.cs").Count().Should().Be(1);
-
+            testProjest.ToString().Should().Be("TestProject");
             var testClass = testProjest.Documents.Where(p => p.ToString() == "SimpleClass.cs").First();
             testClass.Declarations.Count().Should().Be(1);
 
