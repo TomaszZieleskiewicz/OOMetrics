@@ -25,7 +25,7 @@ namespace OOMertics.Helper.Tests
         }
         [Theory]
         [InlineData("./TestData/NonExistingFile.json", "Can not read declarations from * due to: Could not find file*")]
-        [InlineData("./TestData/emptyfile.json", "Can not read declarations from * due to: Can not serialize * to * containing *")]
+        [InlineData("./TestData/emptyfile.json", "Can not read declarations from * due to:*")]
         [InlineData("./TestData/wrongFormat.txt", "Can not read declarations from * due to: Unexpected character encountered while parsing value: *")]
         [InlineData("./TestData/someJsonObject.json", "Can not read declarations from * due to: Cannot deserialize the current JSON object*")]
         [InlineData("./TestData/someJsonObjectCollection.json", "Can not read declarations from * due to: Could not create an instance of type *")]
