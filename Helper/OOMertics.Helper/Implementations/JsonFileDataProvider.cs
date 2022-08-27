@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using OOMetrics.Abstractions;
+using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMertics.Helper.Implementations
 {

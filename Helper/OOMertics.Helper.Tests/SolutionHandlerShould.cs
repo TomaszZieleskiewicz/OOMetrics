@@ -1,5 +1,6 @@
 using OOMertics.Helper.Handlers;
-using OOMetrics.Abstractions;
+using OOMetrics.Abstractions.Abstract;
+using OOMetrics.Abstractions.Enums;
 
 namespace OOMertics.Helper.Tests
 {

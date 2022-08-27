@@ -1,11 +1,17 @@
-﻿namespace OOMetrics.Abstractions
+﻿using OOMetrics.Abstractions.Interfaces;
+
+namespace OOMetrics.Abstractions.Abstract
 {
-    public abstract class ComparableByStringHash
+    public abstract class ComparableByStringHash : IComparableByStringHash
     {
+        public bool CompareByStringHash(IComparableByStringHash? obj)
+        {
+            return Equals(obj);
+        }
         public abstract override string ToString();
         public override bool Equals(object? obj)
         {
-            return (obj is null) ? base.Equals(obj) : GetHashCode() == obj.GetHashCode();
+            return obj is null ? base.Equals(obj) : GetHashCode() == obj.GetHashCode();
         }
         public override int GetHashCode()
         {
@@ -16,5 +22,7 @@
             }
             return stringRepresentation.GetHashCode();
         }
+
+
     }
 }

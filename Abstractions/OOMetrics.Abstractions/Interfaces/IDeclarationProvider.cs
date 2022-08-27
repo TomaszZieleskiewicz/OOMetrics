@@ -1,4 +1,4 @@
-﻿namespace OOMetrics.Abstractions
+﻿namespace OOMetrics.Abstractions.Interfaces
 {
     public interface IDeclarationProvider
     {

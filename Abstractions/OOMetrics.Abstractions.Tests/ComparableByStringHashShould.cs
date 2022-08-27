@@ -1,11 +1,15 @@
-﻿namespace OOMetrics.Abstractions.Tests
+﻿using OOMetrics.Abstractions.Abstract;
+
+namespace OOMetrics.Abstractions.Tests
 {
     public class ComparableByStringHashImplementation : ComparableByStringHash
     {
-        public string value;
+        public string? value;
         public override string ToString()
         {
+#pragma warning disable CS8603 // Possible null reference return.
             return value;
+#pragma warning restore CS8603 // Possible null reference return.
         }
     }
     public class ComparableByStringHashShould
