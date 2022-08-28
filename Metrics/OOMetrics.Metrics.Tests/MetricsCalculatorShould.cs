@@ -55,7 +55,7 @@ namespace OOMetrics.Metrics.Tests
                 IgnoredDependencyNamespaces = new[] { "System" },
                 IgnoredIncomingDependencyNamespaces = new[] { "OOMetrics.Metrics.Tests" }
             };
-            var calculator = new MetricsCalculator(declarations.ToList(), options );
+            var calculator = new MetricsCalculator(declarations.ToList(), options);
             calculator.AnalyzeData();
             var packages = calculator.Packages;
             var totalDistance = packages.Sum(p => p.DistanceFromMainSequence);

@@ -36,7 +36,7 @@ namespace OOMetrics.Metrics
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
             return $"{Name} ({DistanceFromMainSequence.ToString("0.0##", culture)})";
         }
-        private static void AddIfNew<T>(ICollection<T> list, T dependency) where T: IComparableByStringHash
+        private static void AddIfNew<T>(ICollection<T> list, T dependency) where T : IComparableByStringHash
         {
             var isNew = !list.Any(d => d != null && d.CompareByStringHash(dependency));
             if (isNew)
