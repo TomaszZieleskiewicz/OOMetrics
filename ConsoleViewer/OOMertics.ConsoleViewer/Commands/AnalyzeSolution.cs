@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using OOMertics.ConsoleViewer.Interfaces;
 
 namespace OOMertics.ConsoleViewer.Commands
