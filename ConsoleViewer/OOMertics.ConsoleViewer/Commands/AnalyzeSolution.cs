@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
-using OOMertics.ConsoleViewer.Interfaces;
+using OOMertics.Abstractions.Interfaces;
 
 namespace OOMertics.ConsoleViewer.Commands
 {
@@ -12,7 +12,6 @@ namespace OOMertics.ConsoleViewer.Commands
             _console = console;
             _options = options.Value;
         }
-
         public void Execute()
         {
             _console.WriteLine($"Searching for .sln files in {_options.Path}");

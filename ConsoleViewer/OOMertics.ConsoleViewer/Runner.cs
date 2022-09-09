@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using OOMertics.ConsoleViewer.Commands;
-using OOMertics.ConsoleViewer.Interfaces;
+using OOMertics.Abstractions.Interfaces;
 
 namespace OOMertics.ConsoleViewer
 {
@@ -13,7 +13,7 @@ namespace OOMertics.ConsoleViewer
             _analyzeSolution = analyze;
             _options = options.Value;
         }
-        public void Run(string[] args)
+        public void Run()
         {
             switch (_options.Command)
             {
@@ -23,7 +23,6 @@ namespace OOMertics.ConsoleViewer
                 default:
                     throw new Exception($"Unrecognized command: {_options.Command}");
             }
-
         }
     }
 }

@@ -5,7 +5,7 @@ namespace OOMertics.ConsoleViewer.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddCommandLineOptions(this IServiceCollection services)
+        public static IServiceCollection AddCommandLineOptions(this IServiceCollection services, string[] args)
         {
             services.AddOptions<CommandLineParameters>()
                 .Configure(opt =>
@@ -17,10 +17,10 @@ namespace OOMertics.ConsoleViewer.Extensions
                             configuration.AutoHelp = true;
                             configuration.AutoVersion = false;
                             configuration.CaseSensitive = false;
-                            configuration.IgnoreUnknownArguments = false;
+                            configuration.IgnoreUnknownArguments = true;
                             configuration.HelpWriter = writer;
                         });
-                        var result = Parser.Default.ParseArguments(() => opt, Environment.GetCommandLineArgs());
+                        var result = Parser.Default.ParseArguments(() => opt, args);
                         result.WithNotParsed(errors => HandleErrors(errors, writer));
                     }
                 }
@@ -34,7 +34,6 @@ namespace OOMertics.ConsoleViewer.Extensions
                 }
             }
             return services;
-
         }
     }
 }

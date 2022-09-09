@@ -1,4 +1,4 @@
-﻿using OOMertics.ConsoleViewer.Interfaces;
+﻿using OOMertics.Abstractions.Interfaces;
 
 namespace OOMertics.ConsoleViewer
 {

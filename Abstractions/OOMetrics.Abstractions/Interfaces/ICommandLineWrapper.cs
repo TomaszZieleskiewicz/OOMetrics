@@ -1,4 +1,4 @@
-﻿namespace OOMertics.ConsoleViewer.Interfaces
+﻿namespace OOMertics.Abstractions.Interfaces
 {
     public interface ICommandLineWrapper
     {

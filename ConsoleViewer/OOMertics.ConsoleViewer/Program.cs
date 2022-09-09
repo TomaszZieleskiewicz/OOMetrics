@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OOMertics.ConsoleViewer.Commands;
 using OOMertics.ConsoleViewer.Extensions;
-using OOMertics.ConsoleViewer.Interfaces;
+using OOMertics.Abstractions.Interfaces;
 
 namespace OOMertics.ConsoleViewer
 {
@@ -12,11 +12,11 @@ namespace OOMertics.ConsoleViewer
             var services = new ServiceCollection();
             ConfigureServices(services);
             services
-                ?.AddCommandLineOptions()
+                ?.AddCommandLineOptions(args)
                 ?.AddSingleton<IRunner, Runner>()
                 ?.BuildServiceProvider()
                 ?.GetService<IRunner>()
-                ?.Run(args);
+                ?.Run();
         }
 
         private static void ConfigureServices(IServiceCollection services)
