@@ -13,6 +13,5 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Abstractions\OOMetrics.Abstractions\OOMetrics.Abstractions.csproj" />
-	  <ProjectReference Include="..\..\Metrics\OOMetrics.Metrics\OOMetrics.Metrics.csproj" />
 	</ItemGroup>
 </Project>
