@@ -26,7 +26,7 @@ namespace OOMetrics.Metrics
                 foreach (var dependency in declaration.Dependencies.Where(d => CheckIfAdd(d, declaration.ContainingPackage)))
                 {
                     package.AddOutgoingDependency(dependency);
-                    if(CheckIfAddIncomingDependency(declaration.ContainingPackage,dependency.ContainingPackage))
+                    if (CheckIfAddIncomingDependency(declaration.ContainingPackage, dependency.ContainingPackage))
                     {
                         var referencedPackage = RegisterPackage(dependency.ContainingPackage);
                         referencedPackage.AddIncomingDependency(declaration.ToDependency());

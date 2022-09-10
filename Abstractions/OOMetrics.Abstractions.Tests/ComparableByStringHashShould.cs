@@ -15,7 +15,7 @@ namespace OOMetrics.Abstractions.Tests
     public class ComparableByStringHashShould
     {
         [Theory]
-        [InlineData("A","A",true)]
+        [InlineData("A", "A", true)]
         [InlineData("A", "B", false)]
         [InlineData("A", "", false)]
         [InlineData("A", null, false)]

@@ -22,7 +22,7 @@ namespace OOMertics.Helper.Implementations
             {
                 serializer.Serialize(writer, data, typeof(ICollection<IDeclaration>));
             }
-        } 
+        }
         public static ICollection<IDeclaration> ReadFromFile(string path)
         {
             var settings = new JsonSerializerSettings
@@ -34,7 +34,7 @@ namespace OOMertics.Helper.Implementations
             {
                 var jsonFileData = File.ReadAllText(path) ?? string.Empty;
                 var potentialData = JsonConvert.DeserializeObject<ICollection<IDeclaration>>(jsonFileData, settings);
-                if(potentialData == null)
+                if (potentialData == null)
                 {
                     throw new Exception($"Serialization of: {jsonFileData} resulted in null.");
                 }

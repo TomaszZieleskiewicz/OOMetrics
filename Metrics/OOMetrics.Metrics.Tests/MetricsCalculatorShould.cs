@@ -55,11 +55,11 @@ namespace OOMetrics.Metrics.Tests
                 IgnoredDependencyNamespaces = new[] { "System" },
                 IgnoredIncomingDependencyNamespaces = new[] { "OOMetrics.Metrics.Tests" }
             };
-            var calculator = new MetricsCalculator(declarations.ToList(), options );
+            var calculator = new MetricsCalculator(declarations.ToList(), options);
             calculator.AnalyzeData();
             var packages = calculator.Packages;
             var totalDistance = packages.Sum(p => p.DistanceFromMainSequence);
-            totalDistance.Should().BeLessThanOrEqualTo(0.167M);
+            totalDistance.Should().BeLessThanOrEqualTo(0);
             // 2.7107142857142857142857142857M
             // 2.5107142857142857142857142857M
             // 1.5583333333333333333333333333M
@@ -69,6 +69,7 @@ namespace OOMetrics.Metrics.Tests
             // 0.3190476190476190476190476190M
             // 0.2857142857142857142857142857M
             // 0.1666666666666666666666666667M
+            // 0
         }
     }
 }
