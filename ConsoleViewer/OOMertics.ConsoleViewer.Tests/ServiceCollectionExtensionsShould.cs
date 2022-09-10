@@ -42,5 +42,18 @@ namespace OOMertics.ConsoleViewer.Tests
             // Act and assert
             act.Should().Throw<Exception>().WithMessage(" MissingRequiredOptionError");
         }
+        [Fact]
+        public void Not_Throw_When_Help_Requested()
+        {
+            // Arrange
+            var services = new ServiceCollection();
+            var args = new string[] { "--help"};
+            services.AddCommandLineOptions(args);
+            var provider = services.BuildServiceProvider();
+            var options = provider.GetService<IOptions<CommandLineParameters>>();
+            var act = () => options?.Value.Command;
+            // Act and assert
+            act.Should().NotThrow<Exception>();
+        }
     }
 }

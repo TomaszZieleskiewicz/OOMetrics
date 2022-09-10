@@ -32,7 +32,8 @@ namespace OOMertics.Helper.Tests
             testProjest.ToString().Should().Be("TestProject");
             var testClass = testProjest.Documents.Where(p => p.ToString() == "SimpleClass.cs").First();
             testClass.Declarations.Count().Should().Be(1);
-
+            var declaration = testClass.Declarations.Where(d => d.Name == "SimpleClass").First();
+            declaration.ToString().Should().Be("SimpleClass(CLASS_TYPE)");
             var manuDeclarations = testProjest.Documents.Where(p => p.ToString() == "ManyDeclarationsInSingleFile.cs").First();
             manuDeclarations.Declarations.Count().Should().Be(4);
         }
