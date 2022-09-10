@@ -25,6 +25,17 @@ namespace OOMertics.ConsoleViewer.Tests
             // Assert
             commandLineWrapper.WrittenText.First().Should().Be($"Searching for .sln files in {goodParams[1]}");
         }
+        [Fact]
+        public void Throw_On_Unrecognized_Command()
+        {
+            // Arrange
+            var invalidCommand = "NotValidCommand";
+            var wrongParams = new List<string> { "-p", "E:\\Poligon\\github\\OOMetrics", "-c", invalidCommand };
+            (var runner, var commandLineWrapper) = ConfigureRunner(wrongParams.ToArray());
+            Action act = () => runner.Run();
+            // Act and Assert
+            act.Should().Throw<Exception>().WithMessage($"Unrecognized command: {invalidCommand}");
+        }
         private (IRunner, TestCommandLineWrapper) ConfigureRunner(string[] args)
         {
             var services = Startup.ConfigureServices(args);
