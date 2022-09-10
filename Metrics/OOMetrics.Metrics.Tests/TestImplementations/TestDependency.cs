@@ -1,14 +1,14 @@
 ﻿using OOMetrics.Abstractions.Abstract;
 using OOMetrics.Abstractions.Interfaces;
 
-namespace OOMertics.Helper.Implementations
+namespace OOMetrics.Metrics.Tests.TestImplementations
 {
-    public class Dependency : ComparableByStringHash, IDependency
+    public class TestDependency : ComparableByStringHash, IDependency
     {
         public string Name { get; }
         public string DependencyNamespace { get; }
         public string ContainingPackage { get; }
-        public Dependency(string name, string dependencyNamespace, string containingPackage)
+        public TestDependency(string name, string dependencyNamespace, string containingPackage)
         {
             Name = name;
             DependencyNamespace = dependencyNamespace;

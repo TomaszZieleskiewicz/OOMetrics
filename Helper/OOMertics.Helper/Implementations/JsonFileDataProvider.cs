@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using OOMetrics.Abstractions;
+using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMertics.Helper.Implementations
 {
@@ -30,17 +30,20 @@ namespace OOMertics.Helper.Implementations
                 TypeNameHandling = TypeNameHandling.Auto,
                 NullValueHandling = NullValueHandling.Ignore,
             };
-            var jsonFileData = File.ReadAllText(path);
-            if (jsonFileData == null)
+            try
             {
-                throw new Exception($"No data in {path} found.");
+                var jsonFileData = File.ReadAllText(path) ?? string.Empty;
+                var potentialData = JsonConvert.DeserializeObject<ICollection<IDeclaration>>(jsonFileData, settings);
+                if(potentialData == null)
+                {
+                    throw new Exception($"Serialization of: {jsonFileData} resulted in null.");
+                }
+                return potentialData;
             }
-            var potentialData = JsonConvert.DeserializeObject<ICollection<IDeclaration>>(jsonFileData, settings);
-            if (potentialData is null)
+            catch (Exception ex)
             {
-                throw new Exception($"Can not serialize {path} to List<IDeclaration> containing {jsonFileData}");
+                throw new Exception($"Can not read declarations from {path} due to: {ex.Message}", ex);
             }
-            return potentialData;
         }
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task<ICollection<IDeclaration>> GetDeclarations() => data;

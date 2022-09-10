@@ -1,5 +1,5 @@
 ﻿using OOMertics.Helper.Handlers;
-using OOMetrics.Abstractions;
+using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMertics.Helper.Implementations
 {

@@ -1,6 +1,6 @@
-﻿namespace OOMetrics.Abstractions
+﻿namespace OOMetrics.Abstractions.Interfaces
 {
-    public interface IDependency
+    public interface IDependency : IComparableByStringHash
     {
         string Name { get; }
         string DependencyNamespace { get; }
