@@ -1,16 +1,24 @@
-﻿using OOMertics.Helper.Implementations;
+﻿using Microsoft.Extensions.Options;
+using OOMertics.Helper.Implementations;
 using OOMetrics.Abstractions.Abstract;
+using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMetrics.Metrics.Tests
 {
+    public class MetricsCalculatorOptions : IMetricsCalculatorOptions
+    {
+        public string[] IgnoredDependencyNamespaces { get; set; } = Array.Empty<string>();
+        public string[] IgnoredIncomingDependencyNamespaces { get; set; } = Array.Empty<string>();
+        public bool ExcludeIncomingDependenciesFromTests { get; set; } = true;
+    }
     public class MetricsCalculatorShould : TestBase
     {
         [Fact]
         public async void AnalyzeData()
         {
             var provider = new JsonFileDataProvider("./TestData/testSolutionSerializedDependencies.json");
-            var declarations = await provider.GetDeclarations();
-            var calculator = new MetricsCalculator(declarations.ToList());
+            IOptions<MetricsCalculatorOptions> someWrappedOptions = Options.Create(new MetricsCalculatorOptions());
+            var calculator = new MetricsCalculator(provider, someWrappedOptions);
             calculator.AnalyzeData();
             var packages = calculator.Packages;
             packages.Count().Should().Be(3);
@@ -49,13 +57,13 @@ namespace OOMetrics.Metrics.Tests
         public async void AnalyzeThisSolution()
         {
             var provider = new SolutionDeclarationProvider($"{solutionLocation}", "OOMetrics");
-            var declarations = await provider.GetDeclarations();
             var options = new MetricsCalculatorOptions()
             {
                 IgnoredDependencyNamespaces = new[] { "System" },
                 IgnoredIncomingDependencyNamespaces = new[] { "OOMetrics.Metrics.Tests" }
             };
-            var calculator = new MetricsCalculator(declarations.ToList(), options);
+            IOptions<MetricsCalculatorOptions> someWrappedOptions = Options.Create(options);
+            var calculator = new MetricsCalculator(provider, someWrappedOptions);
             calculator.AnalyzeData();
             var packages = calculator.Packages;
             var totalDistance = packages.Sum(p => p.DistanceFromMainSequence);
