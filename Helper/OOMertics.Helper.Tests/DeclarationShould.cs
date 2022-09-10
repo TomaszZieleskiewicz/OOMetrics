@@ -10,6 +10,7 @@ namespace OOMertics.Helper.Tests
         {
             var declaration = new Declaration("TestDeclaration", DeclarationType.CLASS_TYPE, "TestNamespace", "TestProject");
             declaration.Name.Should().Be("TestDeclaration");
+            declaration.ToString().Should().Be("TestDeclaration(CLASS_TYPE) from TestNamespace in TestProject");
         }
     }
 }
