@@ -1,4 +1,4 @@
 ignore:
     - "**/*.Tests/*" 
-    - "**/OOMetrics/ConsoleViewer/OOMertics.ConsoleViewer/Program.cs" 
-    - "**/OOMetrics/ConsoleViewer/OOMertics.ConsoleViewer/CommandLineWrapper.cs" 
+    - "**/OOMertics.ConsoleViewer/Program.cs" 
+    - "**/OOMertics.ConsoleViewer/CommandLineWrapper.cs" 
