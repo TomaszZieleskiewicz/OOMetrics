@@ -7,13 +7,14 @@ namespace OOMetrics.Metrics
     {
         private readonly IDeclarationProvider declarationProvider;
         private readonly IMetricsCalculatorOptions Options;
+        private readonly string testProjectNamePattern = "{0}.Tests";
         public readonly List<Package> Packages = new List<Package>();
         public MetricsCalculator(IDeclarationProvider declarationProvider, IOptions<IMetricsCalculatorOptions> options)
         {
             this.declarationProvider = declarationProvider;
             Options = options.Value;
         }
-        public async void AnalyzeData()
+        public async Task AnalyzeData()
         {
             var declarations = await declarationProvider.GetDeclarations();
             foreach (var declaration in declarations)
@@ -41,9 +42,8 @@ namespace OOMetrics.Metrics
         }
         private bool CheckIfAddIncomingDependency(string declarationPackage, string dependencyPackage)
         {
-            var excludedTestDependency = (Options.ExcludeIncomingDependenciesFromTests && declarationPackage == $"{dependencyPackage}.Tests");
-            var excludedIncoming = Options.IgnoredIncomingDependencyNamespaces.Contains(declarationPackage);
-            return !(excludedTestDependency || excludedIncoming);
+            var excludedTestDependency = (Options.ExcludeIncomingDependenciesFromTests && declarationPackage == string.Format(testProjectNamePattern,dependencyPackage));
+            return !(excludedTestDependency);
         }
         private Package RegisterPackage(string packageName)
         {

@@ -27,7 +27,7 @@ namespace OOMetrics.Metrics.Tests.TestImplementations
         }
         public IDependency ToDependency()
         {
-            return new Dependency(Name, DeclarationNamespace, ContainingPackage);
+            return new TestDependency(Name, DeclarationNamespace, ContainingPackage);
         }
         public override string ToString()
         {

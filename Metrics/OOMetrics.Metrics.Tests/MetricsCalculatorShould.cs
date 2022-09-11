@@ -7,8 +7,7 @@ namespace OOMetrics.Metrics.Tests
 {
     public class MetricsCalculatorOptions : IMetricsCalculatorOptions
     {
-        public string[] IgnoredDependencyNamespaces { get; set; } = Array.Empty<string>();
-        public string[] IgnoredIncomingDependencyNamespaces { get; set; } = Array.Empty<string>();
+        public IEnumerable<string> IgnoredDependencyNamespaces { get; set; } = new List<string>();
         public bool ExcludeIncomingDependenciesFromTests { get; set; } = true;
     }
     public class MetricsCalculatorShould : TestBase
@@ -19,7 +18,7 @@ namespace OOMetrics.Metrics.Tests
             var provider = new JsonFileDataProvider("./TestData/testSolutionSerializedDependencies.json");
             IOptions<MetricsCalculatorOptions> someWrappedOptions = Options.Create(new MetricsCalculatorOptions());
             var calculator = new MetricsCalculator(provider, someWrappedOptions);
-            calculator.AnalyzeData();
+            await calculator.AnalyzeData();
             var packages = calculator.Packages;
             packages.Count().Should().Be(3);
 
@@ -59,15 +58,14 @@ namespace OOMetrics.Metrics.Tests
             var provider = new SolutionDeclarationProvider($"{solutionLocation}", "OOMetrics");
             var options = new MetricsCalculatorOptions()
             {
-                IgnoredDependencyNamespaces = new[] { "System" },
-                IgnoredIncomingDependencyNamespaces = new[] { "OOMetrics.Metrics.Tests" }
+                IgnoredDependencyNamespaces = new[] { "System" }
             };
             IOptions<MetricsCalculatorOptions> someWrappedOptions = Options.Create(options);
             var calculator = new MetricsCalculator(provider, someWrappedOptions);
-            calculator.AnalyzeData();
+            await calculator.AnalyzeData();
             var packages = calculator.Packages;
             var totalDistance = packages.Sum(p => p.DistanceFromMainSequence);
-            totalDistance.Should().BeLessThanOrEqualTo(0);
+            totalDistance.Should().BeLessThanOrEqualTo(0.1667M);
             // 2.7107142857142857142857142857M
             // 2.5107142857142857142857142857M
             // 1.5583333333333333333333333333M
@@ -77,7 +75,6 @@ namespace OOMetrics.Metrics.Tests
             // 0.3190476190476190476190476190M
             // 0.2857142857142857142857142857M
             // 0.1666666666666666666666666667M
-            // 0
         }
     }
 }
