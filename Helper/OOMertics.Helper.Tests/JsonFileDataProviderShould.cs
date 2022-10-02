@@ -1,5 +1,8 @@
-﻿using OOMertics.Helper.Implementations;
+﻿using Microsoft.Extensions.Options;
+using OOMertics.Helper.Implementations;
 using OOMetrics.Abstractions.Abstract;
+using OOMetrics.Abstractions.Interfaces;
+using System.IO;
 
 namespace OOMertics.Helper.Tests
 {
@@ -15,7 +18,8 @@ namespace OOMertics.Helper.Tests
         [Fact]
         public async void ProperlySaveAndReadFromFile()
         {
-            var provider = new SolutionDeclarationProvider($"{solutionLocation}{testSolutionDir}", testSolutionName);
+            var options = Options.Create(new SolutionDeclarationProviderOptions { Path = $"{solutionLocation}{testSolutionDir}", SolutionName = testSolutionName });
+            var provider = new SolutionDeclarationProvider(options);
             var declaraitons = await provider.GetDeclarations();
 
             JsonFileDataProvider.DumpIntoFile("./TestData/SolutionDeclarationProviderShould.ProvideDeclarations.json", declaraitons);

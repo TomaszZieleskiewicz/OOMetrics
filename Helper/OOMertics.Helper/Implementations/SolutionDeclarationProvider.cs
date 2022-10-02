@@ -1,21 +1,21 @@
-﻿using OOMertics.Helper.Handlers;
+﻿using Microsoft.Extensions.Options;
+using OOMertics.Helper.Handlers;
 using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMertics.Helper.Implementations
 {
     public class SolutionDeclarationProvider : IDeclarationProvider
     {
-        private readonly string path;
-        private readonly string solutionName;
         private SolutionHandler? solutionHandler;
-        public SolutionDeclarationProvider(string path, string solutionName)
+        private SolutionDeclarationProviderOptions _options;
+
+        public SolutionDeclarationProvider(IOptions<SolutionDeclarationProviderOptions> options)
         {
-            this.path = path;
-            this.solutionName = solutionName;
+            _options = options.Value;
         }
         public async Task<ICollection<IDeclaration>> GetDeclarations()
         {
-            solutionHandler ??= await SolutionHandler.OpenAsync(path, solutionName);
+            solutionHandler ??= await SolutionHandler.OpenAsync(_options.Path, _options.SolutionName);
 
             var declarations = new List<IDeclaration>();
             foreach (var project in solutionHandler.Projects)

@@ -18,7 +18,7 @@ namespace OOMertics.ConsoleViewer
             switch (_options.Command)
             {
                 case "analyze":
-                    _analyzeSolution.Execute();
+                    _analyzeSolution.ExecuteAsync();
                     break;
                 default:
                     throw new Exception($"Unrecognized command: {_options.Command}");

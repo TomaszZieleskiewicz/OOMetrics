@@ -1,5 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using OOMertics.Abstractions.Interfaces;
+using OOMertics.Helper.Implementations;
 using System.IO;
 
 namespace OOMertics.ConsoleViewer.Tests
@@ -18,7 +20,7 @@ namespace OOMertics.ConsoleViewer.Tests
         public void Run_With_Proper_Params()
         {
             // Arrange
-            var goodParams = new List<string> { "-p", "E:\\Poligon\\github\\OOMetrics" };
+            var goodParams = new List<string> { "-p", "E:\\Poligon\\github\\OOMetrics", "-s", "OOMetrics" };
             (var runner, var commandLineWrapper) = ConfigureRunner(goodParams.ToArray());
             // Act
             runner.Run();
@@ -30,7 +32,7 @@ namespace OOMertics.ConsoleViewer.Tests
         {
             // Arrange
             var invalidCommand = "NotValidCommand";
-            var wrongParams = new List<string> { "-p", "E:\\Poligon\\github\\OOMetrics", "-c", invalidCommand };
+            var wrongParams = new List<string> { "-p", "E:\\Poligon\\github\\OOMetrics", "-c", invalidCommand, "-s", "OOMetrics"};
             (var runner, var commandLineWrapper) = ConfigureRunner(wrongParams.ToArray());
             Action act = () => runner.Run();
             // Act and Assert
@@ -46,6 +48,7 @@ namespace OOMertics.ConsoleViewer.Tests
             }
             services.Remove(serviceDescriptor);
             services.AddSingleton<ICommandLineWrapper, TestCommandLineWrapper>();
+
             var provider = services.BuildServiceProvider();
             var runner = provider.GetService<IRunner>();
             if (runner == null)
@@ -57,6 +60,7 @@ namespace OOMertics.ConsoleViewer.Tests
             {
                 throw new NullReferenceException("Can not find ICommandLineWrapper instance in service collection");
             }
+            
             return (runner, (TestCommandLineWrapper)commandLineWrapper);
         }
     }

@@ -1,6 +1,8 @@
-﻿using OOMertics.Helper.Implementations;
+﻿using Microsoft.Extensions.Options;
+using OOMertics.Helper.Implementations;
 using OOMetrics.Abstractions.Abstract;
 using OOMetrics.Abstractions.Enums;
+using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMertics.Helper.Tests
 {
@@ -9,7 +11,8 @@ namespace OOMertics.Helper.Tests
         [Fact]
         public async void ProvideDeclarations()
         {
-            var provider = new SolutionDeclarationProvider($"{solutionLocation}{testSolutionDir}", testSolutionName);
+            var options = Options.Create(new SolutionDeclarationProviderOptions { Path = $"{solutionLocation}{testSolutionDir}", SolutionName = testSolutionName });
+            var provider = new SolutionDeclarationProvider(options);
             var declaraitons = await provider.GetDeclarations();
             declaraitons.Count().Should().Be(18);
             var testClass = declaraitons.Where(declaration => declaration.Name == "ClassUsingTypesFromOtherProject").First();

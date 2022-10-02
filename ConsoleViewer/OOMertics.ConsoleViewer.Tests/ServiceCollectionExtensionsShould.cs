@@ -1,13 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using OOMertics.Abstractions.Interfaces;
 using OOMertics.ConsoleViewer.Extensions;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOMertics.ConsoleViewer.Tests
 {
@@ -19,7 +12,7 @@ namespace OOMertics.ConsoleViewer.Tests
             // Arrange
             var services = new ServiceCollection();
             var path = "E:\\Poligon\\github\\OOMetrics";
-            var args = new string[] { "-p", path };
+            var args = new string[] { "-p", path, "-s", "OOMetrics.sln" };
             // Act
             services.AddCommandLineOptions(args);
             // Assert
@@ -40,7 +33,7 @@ namespace OOMertics.ConsoleViewer.Tests
             var options = provider.GetService<IOptions<CommandLineParameters>>();
             var act = () => options?.Value.Command;
             // Act and assert
-            act.Should().Throw<Exception>().WithMessage(" MissingRequiredOptionError");
+            act.Should().Throw<Exception>().WithMessage("*Required option 'p, path' is missing*");
         }
         [Fact]
         public void Not_Throw_When_Help_Requested()
