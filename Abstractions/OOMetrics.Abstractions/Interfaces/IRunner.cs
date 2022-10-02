@@ -2,6 +2,6 @@
 {
     public interface IRunner
     {
-        public void Run();
+        public Task RunAsync();
     }
 }

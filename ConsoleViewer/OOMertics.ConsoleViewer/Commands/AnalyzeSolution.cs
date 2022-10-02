@@ -16,7 +16,7 @@ namespace OOMertics.ConsoleViewer.Commands
             _options = options.Value;
             _metricsCalculator = metricsCalculator;
         }
-        public async void ExecuteAsync()
+        public async Task ExecuteAsync()
         {
             _console.WriteLine($"Searching for .sln files in {_options.Path}");
             await _metricsCalculator.AnalyzeData();

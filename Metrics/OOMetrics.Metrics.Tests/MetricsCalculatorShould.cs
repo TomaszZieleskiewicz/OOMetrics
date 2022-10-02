@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using OOMertics.Helper.Implementations;
-using OOMertics.Helper.Tests;
 using OOMetrics.Abstractions.Abstract;
 using OOMetrics.Abstractions.Interfaces;
 
