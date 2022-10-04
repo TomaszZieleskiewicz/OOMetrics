@@ -2,6 +2,6 @@
 {
     public interface ICommandLineWrapper
     {
-        void WriteLine(string text);
+        void WriteLine(string text, ConsoleColor foregroundColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black);
     }
 }

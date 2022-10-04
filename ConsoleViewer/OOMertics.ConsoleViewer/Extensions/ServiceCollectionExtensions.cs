@@ -23,6 +23,7 @@ namespace OOMertics.ConsoleViewer.Extensions
                         configuration.HelpWriter = writer;
                     });
                     var result = parser.ParseArguments(() => opt, args);
+
                     result.WithNotParsed(errors => HandleErrors(errors, writer));
                 }
             );

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using OOMetrics.Abstractions.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace OOMetrics.Metrics
 {
@@ -8,11 +9,13 @@ namespace OOMetrics.Metrics
         private readonly IDeclarationProvider declarationProvider;
         private readonly MetricsCalculatorOptions options;
         private readonly string testProjectNamePattern = "{0}.Tests";
+        private Regex allowedNamespacesMatcher;
         public readonly List<Package> Packages = new List<Package>();
         public MetricsCalculator(IDeclarationProvider declarationProvider, IOptions<MetricsCalculatorOptions> options)
         {
             this.declarationProvider = declarationProvider;
             this.options = options.Value;
+            allowedNamespacesMatcher = SetMatcherRegexp();
         }
         public async Task AnalyzeData()
         {
@@ -36,9 +39,28 @@ namespace OOMetrics.Metrics
         private bool CheckIfAdd(IDependency dependency, string containingPackage)
         {
             var isFromTheSamePackage = dependency.ContainingPackage == containingPackage;
-            var inIgnoredNamespace = options.IgnoredDependencyNamespaces.Contains(dependency.DependencyNamespace);
-            var returnValue = !(isFromTheSamePackage || inIgnoredNamespace);
+            var allowedNamespace = allowedNamespacesMatcher.IsMatch(dependency.DependencyNamespace)||allowedNamespacesMatcher.IsMatch(dependency.ContainingPackage);
+            var returnValue = !(isFromTheSamePackage || !allowedNamespace);
             return returnValue;
+        }
+        private Regex SetMatcherRegexp()
+        {
+            string pattern;
+            if(options.NamespacesToAnalyze.Count() == 0)
+            {
+                pattern = ".*";
+            } else
+            {
+                pattern = "(";
+                foreach (var allowed in options.NamespacesToAnalyze)
+                {
+                    var glob = allowed.Contains('*') ? "" : "*";
+                    pattern += $"{allowed}{glob}|";
+                }
+                pattern = $"{pattern.Remove(pattern.Length - 1)})";
+            }
+
+            return new Regex(pattern);
         }
         private bool CheckIfAddIncomingDependency(string declarationPackage, string dependencyPackage)
         {

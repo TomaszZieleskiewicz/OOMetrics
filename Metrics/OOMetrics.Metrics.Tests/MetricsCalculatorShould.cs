@@ -54,7 +54,7 @@ namespace OOMetrics.Metrics.Tests
             var provider = new SolutionDeclarationProvider(providerOptions);
             var options = new MetricsCalculatorOptions()
             {
-                IgnoredDependencyNamespaces = new[] { "System" }
+                NamespacesToAnalyze = new[] { "OOMetrics" }
             };
             IOptions<MetricsCalculatorOptions> someWrappedOptions = Options.Create(options);
             var calculator = new MetricsCalculator(provider, someWrappedOptions);

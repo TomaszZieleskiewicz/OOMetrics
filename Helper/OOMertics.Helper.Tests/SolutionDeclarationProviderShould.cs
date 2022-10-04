@@ -27,7 +27,7 @@ namespace OOMertics.Helper.Tests
             abstractClass.Type.Should().Be(DeclarationType.ABSTRACT_CLASS_TYPE);
             abstractClass.DeclarationNamespace.Should().Be("AbstractStableProject");
             abstractClass.ContainingPackage.Should().Be("AbstractStableProject");
-            abstractClass.ToString().Should().Be("AbstractClass(ABSTRACT_CLASS_TYPE) from AbstractStableProject in AbstractStableProject");
+            abstractClass.ToString().Should().Be("Abstract AbstractClass(ABSTRACT_CLASS_TYPE) from AbstractStableProject in AbstractStableProject");
         }
     }
 }

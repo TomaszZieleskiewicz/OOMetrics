@@ -30,7 +30,7 @@ namespace OOMertics.Helper.Implementations
         }
         public override string ToString()
         {
-            return $"{Name}({Type}) from {DeclarationNamespace} in {ContainingPackage}";
+            return $"{(IsAbstract?"Abstract ":"")}{Name}({Type}) from {DeclarationNamespace} in {ContainingPackage}";
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface IMetricsCalculatorOptions
     {
-        IEnumerable<string> IgnoredDependencyNamespaces { get; init; }
+        IEnumerable<string> NamespacesToAnalyze { get; init; }
         bool ExcludeIncomingDependenciesFromTests { get; init; }
     }
 }

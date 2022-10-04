@@ -7,7 +7,7 @@ namespace OOMertics.ConsoleViewer.Tests
     public class TestCommandLineWrapper : ICommandLineWrapper
     {
         public List<string> WrittenText = new List<string>();
-        public void WriteLine(string text)
+        public void WriteLine(string text, ConsoleColor foregroundColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black)
         {
             WrittenText.Add(text);
         }
