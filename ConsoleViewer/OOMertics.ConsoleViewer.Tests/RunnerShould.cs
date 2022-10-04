@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using OOMertics.Abstractions.Interfaces;
-using System.IO;
+using OOMetrics.Abstractions.Abstract;
 
 namespace OOMertics.ConsoleViewer.Tests
 {
@@ -15,26 +15,26 @@ namespace OOMertics.ConsoleViewer.Tests
     public class RunnerShould
     {
         [Fact]
-        public void Run_With_Proper_Params()
+        public async Task Run_With_Proper_Params()
         {
             // Arrange
-            var goodParams = new List<string> { "-p", "E:\\Poligon\\github\\OOMetrics" };
+            var goodParams = new List<string> { "-p", TestPathBase.SolutionLocation, "-s", "OOMetrics" };
             (var runner, var commandLineWrapper) = ConfigureRunner(goodParams.ToArray());
             // Act
-            runner.Run();
+            await runner.RunAsync();
             // Assert
             commandLineWrapper.WrittenText.First().Should().Be($"Searching for .sln files in {goodParams[1]}");
         }
         [Fact]
-        public void Throw_On_Unrecognized_Command()
+        public async Task Throw_On_Unrecognized_Command()
         {
             // Arrange
             var invalidCommand = "NotValidCommand";
-            var wrongParams = new List<string> { "-p", "E:\\Poligon\\github\\OOMetrics", "-c", invalidCommand };
+            var wrongParams = new List<string> { "-p", TestPathBase.SolutionLocation, "-c", invalidCommand, "-s", "OOMetrics"};
             (var runner, var commandLineWrapper) = ConfigureRunner(wrongParams.ToArray());
-            Action act = () => runner.Run();
+            Func<Task> act = async () => await runner.RunAsync();
             // Act and Assert
-            act.Should().Throw<Exception>().WithMessage($"Unrecognized command: {invalidCommand}");
+            await act.Should().ThrowAsync<Exception>().WithMessage($"Unrecognized command: {invalidCommand}");
         }
         private (IRunner, TestCommandLineWrapper) ConfigureRunner(string[] args)
         {
@@ -46,6 +46,7 @@ namespace OOMertics.ConsoleViewer.Tests
             }
             services.Remove(serviceDescriptor);
             services.AddSingleton<ICommandLineWrapper, TestCommandLineWrapper>();
+
             var provider = services.BuildServiceProvider();
             var runner = provider.GetService<IRunner>();
             if (runner == null)
@@ -57,6 +58,7 @@ namespace OOMertics.ConsoleViewer.Tests
             {
                 throw new NullReferenceException("Can not find ICommandLineWrapper instance in service collection");
             }
+            
             return (runner, (TestCommandLineWrapper)commandLineWrapper);
         }
     }

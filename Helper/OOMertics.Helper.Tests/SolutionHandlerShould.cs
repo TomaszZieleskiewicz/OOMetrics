@@ -4,18 +4,18 @@ using OOMetrics.Abstractions.Enums;
 
 namespace OOMertics.Helper.Tests
 {
-    public class SolutionHandlerShould : TestBase
+    public class SolutionHandlerShould
     {
         private async Task<SolutionHandler> LoadTestSolution()
         {
-            return await SolutionHandler.OpenAsync($"{solutionLocation}{testSolutionDir}", testSolutionName);
+            return await SolutionHandler.OpenAsync($"{TestPathBase.SolutionLocation}{TestPathBase.TestSolutionDir}", TestPathBase.TestSolutionName);
         }
         [Theory]
         [InlineData(@"", "OOMetrics")]
         [InlineData(@"TestData/TestSolution", "TestSolution")]
         public async void ProperlyLoadSolutions(string path, string solutionName)
         {
-            var solutionHandler = await SolutionHandler.OpenAsync($"{solutionLocation}{path}", solutionName);
+            var solutionHandler = await SolutionHandler.OpenAsync($"{TestPathBase.SolutionLocation}{path}", solutionName);
             solutionHandler.Projects.Count.Should().BeGreaterThan(0);
         }
         [Fact]

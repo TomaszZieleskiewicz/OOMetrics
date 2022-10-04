@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
@@ -15,6 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Abstractions\OOMetrics.Abstractions\OOMetrics.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Helper\OOMertics.Helper\OOMertics.Helper.csproj" />
+    <ProjectReference Include="..\..\Metrics\OOMetrics.Metrics\OOMetrics.Metrics.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using OOMertics.Abstractions.Interfaces;
+using OOMetrics.Metrics;
 
 namespace OOMertics.ConsoleViewer.Commands
 {
@@ -7,14 +8,22 @@ namespace OOMertics.ConsoleViewer.Commands
     {
         private ICommandLineWrapper _console;
         private CommandLineParameters _options;
-        public AnalyzeSolution(ICommandLineWrapper console, IOptions<CommandLineParameters> options)
+        private MetricsCalculator _metricsCalculator;
+
+        public AnalyzeSolution(ICommandLineWrapper console, IOptions<CommandLineParameters> options, MetricsCalculator metricsCalculator)
         {
             _console = console;
             _options = options.Value;
+            _metricsCalculator = metricsCalculator;
         }
-        public void Execute()
+        public async Task ExecuteAsync()
         {
             _console.WriteLine($"Searching for .sln files in {_options.Path}");
+            await _metricsCalculator.AnalyzeData();
+            foreach (var package in _metricsCalculator.Packages)
+            {
+                _console.WriteLine(package.DistanceFromMainSequence.ToString());
+            }
         }
     }
 }

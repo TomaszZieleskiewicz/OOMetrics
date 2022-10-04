@@ -1,5 +1,8 @@
-﻿using CommandLine;
+﻿using AutoMapper;
+using CommandLine;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMertics.ConsoleViewer.Extensions
 {
@@ -10,19 +13,17 @@ namespace OOMertics.ConsoleViewer.Extensions
             services.AddOptions<CommandLineParameters>()
                 .Configure(opt =>
                 {
-                    using (var writer = new StringWriter())
+                    using var writer = new StringWriter();
+                    var parser = new Parser(configuration =>
                     {
-                        var parser = new Parser(configuration =>
-                        {
-                            configuration.AutoHelp = true;
-                            configuration.AutoVersion = false;
-                            configuration.CaseSensitive = false;
-                            configuration.IgnoreUnknownArguments = true;
-                            configuration.HelpWriter = writer;
-                        });
-                        var result = Parser.Default.ParseArguments(() => opt, args);
-                        result.WithNotParsed(errors => HandleErrors(errors, writer));
-                    }
+                        configuration.AutoHelp = true;
+                        configuration.AutoVersion = false;
+                        configuration.CaseSensitive = false;
+                        configuration.IgnoreUnknownArguments = true;
+                        configuration.HelpWriter = writer;
+                    });
+                    var result = parser.ParseArguments(() => opt, args);
+                    result.WithNotParsed(errors => HandleErrors(errors, writer));
                 }
             );
             void HandleErrors(IEnumerable<Error> errors, TextWriter writer)
@@ -33,6 +34,16 @@ namespace OOMertics.ConsoleViewer.Extensions
                     throw new Exception(message);
                 }
             }
+            return services;
+        }
+        public static IServiceCollection AddMappedOptions<T>(this IServiceCollection services) where T: class
+        {
+            services.AddOptions<T>().Configure<IOptions<CommandLineParameters>>((opt, options) =>
+            {
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<CommandLineParameters, T>());
+                var mapper = new Mapper(config);
+                mapper.Map(options.Value, opt);
+            });
             return services;
         }
     }
