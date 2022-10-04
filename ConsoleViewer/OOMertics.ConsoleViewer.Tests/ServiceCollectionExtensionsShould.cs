@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using OOMertics.ConsoleViewer.Extensions;
+using OOMetrics.Abstractions.Abstract;
 
 namespace OOMertics.ConsoleViewer.Tests
 {
@@ -11,8 +12,8 @@ namespace OOMertics.ConsoleViewer.Tests
         {
             // Arrange
             var services = new ServiceCollection();
-            var path = "E:\\Poligon\\github\\OOMetrics";
-            var args = new string[] { "-p", path, "-s", "OOMetrics.sln" };
+            var path = TestPathBase.SolutionLocation;
+            var args = new string[] { "-p", path, "-s", "OOMetrics" };
             // Act
             services.AddCommandLineOptions(args);
             // Assert

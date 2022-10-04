@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using OOMertics.Abstractions.Interfaces;
+using OOMetrics.Abstractions.Abstract;
 
 namespace OOMertics.ConsoleViewer.Tests
 {
@@ -17,7 +18,7 @@ namespace OOMertics.ConsoleViewer.Tests
         public async Task Run_With_Proper_Params()
         {
             // Arrange
-            var goodParams = new List<string> { "-p", "E:\\Poligon\\github\\OOMetrics", "-s", "OOMetrics" };
+            var goodParams = new List<string> { "-p", TestPathBase.SolutionLocation, "-s", "OOMetrics" };
             (var runner, var commandLineWrapper) = ConfigureRunner(goodParams.ToArray());
             // Act
             await runner.RunAsync();
@@ -29,7 +30,7 @@ namespace OOMertics.ConsoleViewer.Tests
         {
             // Arrange
             var invalidCommand = "NotValidCommand";
-            var wrongParams = new List<string> { "-p", "E:\\Poligon\\github\\OOMetrics", "-c", invalidCommand, "-s", "OOMetrics"};
+            var wrongParams = new List<string> { "-p", TestPathBase.SolutionLocation, "-c", invalidCommand, "-s", "OOMetrics"};
             (var runner, var commandLineWrapper) = ConfigureRunner(wrongParams.ToArray());
             Func<Task> act = async () => await runner.RunAsync();
             // Act and Assert

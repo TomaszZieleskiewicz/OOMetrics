@@ -1,9 +1,9 @@
 ﻿namespace OOMetrics.Abstractions.Abstract
 {
-    public abstract class TestBase
+    public static class TestPathBase
     {
-        protected static string solutionLocation = @"../../../../../";
-        protected static string testSolutionDir = @"TestData/TestSolution";
-        protected static string testSolutionName = "TestSolution";
+        public static string SolutionLocation { get; } = @"../../../../../";
+        public static string TestSolutionDir { get; } = @"TestData/TestSolution";
+        public static string TestSolutionName { get; } = "TestSolution";
     }
 }

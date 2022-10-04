@@ -5,7 +5,7 @@ using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMetrics.Metrics.Tests
 {
-    public class MetricsCalculatorShould : TestBase
+    public class MetricsCalculatorShould
     {
         [Fact]
         public async void AnalyzeData()
@@ -50,7 +50,7 @@ namespace OOMetrics.Metrics.Tests
         [Fact]
         public async void AnalyzeThisSolution()
         {
-            var providerOptions = Options.Create(new SolutionDeclarationProviderOptions { Path = $"{solutionLocation}", SolutionName = "OOMetrics" });
+            var providerOptions = Options.Create(new SolutionDeclarationProviderOptions { Path = $"{TestPathBase.SolutionLocation}", SolutionName = "OOMetrics" });
             var provider = new SolutionDeclarationProvider(providerOptions);
             var options = new MetricsCalculatorOptions()
             {
@@ -61,7 +61,7 @@ namespace OOMetrics.Metrics.Tests
             await calculator.AnalyzeData();
             var packages = calculator.Packages;
             var totalDistance = packages.Sum(p => p.DistanceFromMainSequence);
-            totalDistance.Should().BeLessThanOrEqualTo(0.5M);
+            totalDistance.Should().BeLessThanOrEqualTo(0.584M);
             // 2.7107142857142857142857142857M
             // 2.5107142857142857142857142857M
             // 1.5583333333333333333333333333M

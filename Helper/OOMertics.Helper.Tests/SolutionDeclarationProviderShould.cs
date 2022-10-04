@@ -6,12 +6,12 @@ using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMertics.Helper.Tests
 {
-    public class SolutionDeclarationProviderShould : TestBase
+    public class SolutionDeclarationProviderShould
     {
         [Fact]
         public async void ProvideDeclarations()
         {
-            var options = Options.Create(new SolutionDeclarationProviderOptions { Path = $"{solutionLocation}{testSolutionDir}", SolutionName = testSolutionName });
+            var options = Options.Create(new SolutionDeclarationProviderOptions { Path = $"{TestPathBase.SolutionLocation}{TestPathBase.TestSolutionDir}", SolutionName = TestPathBase.TestSolutionName });
             var provider = new SolutionDeclarationProvider(options);
             var declaraitons = await provider.GetDeclarations();
             declaraitons.Count().Should().Be(18);

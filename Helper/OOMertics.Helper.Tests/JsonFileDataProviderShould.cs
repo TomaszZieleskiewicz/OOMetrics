@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
 using OOMertics.Helper.Implementations;
 using OOMetrics.Abstractions.Abstract;
-using OOMetrics.Abstractions.Interfaces;
-using System.IO;
 
 namespace OOMertics.Helper.Tests
 {
-    public class JsonFileDataProviderShould : TestBase
+    public class JsonFileDataProviderShould
     {
         [Fact]
         public async void ReadFromValidFile()
@@ -18,7 +16,7 @@ namespace OOMertics.Helper.Tests
         [Fact]
         public async void ProperlySaveAndReadFromFile()
         {
-            var options = Options.Create(new SolutionDeclarationProviderOptions { Path = $"{solutionLocation}{testSolutionDir}", SolutionName = testSolutionName });
+            var options = Options.Create(new SolutionDeclarationProviderOptions { Path = $"{TestPathBase.SolutionLocation}{TestPathBase.TestSolutionDir}", SolutionName = TestPathBase.TestSolutionName });
             var provider = new SolutionDeclarationProvider(options);
             var declaraitons = await provider.GetDeclarations();
 
