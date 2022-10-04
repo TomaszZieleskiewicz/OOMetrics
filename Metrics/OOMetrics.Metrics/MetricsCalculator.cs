@@ -6,13 +6,13 @@ namespace OOMetrics.Metrics
     public class MetricsCalculator
     {
         private readonly IDeclarationProvider declarationProvider;
-        private readonly IMetricsCalculatorOptions Options;
+        private readonly MetricsCalculatorOptions options;
         private readonly string testProjectNamePattern = "{0}.Tests";
         public readonly List<Package> Packages = new List<Package>();
-        public MetricsCalculator(IDeclarationProvider declarationProvider, IOptions<IMetricsCalculatorOptions> options)
+        public MetricsCalculator(IDeclarationProvider declarationProvider, IOptions<MetricsCalculatorOptions> options)
         {
             this.declarationProvider = declarationProvider;
-            Options = options.Value;
+            this.options = options.Value;
         }
         public async Task AnalyzeData()
         {
@@ -36,13 +36,13 @@ namespace OOMetrics.Metrics
         private bool CheckIfAdd(IDependency dependency, string containingPackage)
         {
             var isFromTheSamePackage = dependency.ContainingPackage == containingPackage;
-            var inIgnoredNamespace = Options.IgnoredDependencyNamespaces.Contains(dependency.DependencyNamespace);
+            var inIgnoredNamespace = options.IgnoredDependencyNamespaces.Contains(dependency.DependencyNamespace);
             var returnValue = !(isFromTheSamePackage || inIgnoredNamespace);
             return returnValue;
         }
         private bool CheckIfAddIncomingDependency(string declarationPackage, string dependencyPackage)
         {
-            var excludedTestDependency = (Options.ExcludeIncomingDependenciesFromTests && declarationPackage == string.Format(testProjectNamePattern,dependencyPackage));
+            var excludedTestDependency = (options.ExcludeIncomingDependenciesFromTests && declarationPackage == string.Format(testProjectNamePattern,dependencyPackage));
             return !(excludedTestDependency);
         }
         private Package RegisterPackage(string packageName)

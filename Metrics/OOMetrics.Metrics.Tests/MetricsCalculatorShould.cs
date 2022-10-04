@@ -5,12 +5,7 @@ using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMetrics.Metrics.Tests
 {
-    public class MetricsCalculatorOptions : IMetricsCalculatorOptions
-    {
-        public IEnumerable<string> IgnoredDependencyNamespaces { get; set; } = new List<string>();
-        public bool ExcludeIncomingDependenciesFromTests { get; set; } = true;
-    }
-    public class MetricsCalculatorShould : TestBase
+    public class MetricsCalculatorShould
     {
         [Fact]
         public async void AnalyzeData()
@@ -55,7 +50,8 @@ namespace OOMetrics.Metrics.Tests
         [Fact]
         public async void AnalyzeThisSolution()
         {
-            var provider = new SolutionDeclarationProvider($"{solutionLocation}", "OOMetrics");
+            var providerOptions = Options.Create(new SolutionDeclarationProviderOptions { Path = $"{TestPathBase.SolutionLocation}", SolutionName = "OOMetrics" });
+            var provider = new SolutionDeclarationProvider(providerOptions);
             var options = new MetricsCalculatorOptions()
             {
                 IgnoredDependencyNamespaces = new[] { "System" }
@@ -65,7 +61,7 @@ namespace OOMetrics.Metrics.Tests
             await calculator.AnalyzeData();
             var packages = calculator.Packages;
             var totalDistance = packages.Sum(p => p.DistanceFromMainSequence);
-            totalDistance.Should().BeLessThanOrEqualTo(0.1667M);
+            totalDistance.Should().BeLessThanOrEqualTo(0.584M);
             // 2.7107142857142857142857142857M
             // 2.5107142857142857142857142857M
             // 1.5583333333333333333333333333M
@@ -75,6 +71,7 @@ namespace OOMetrics.Metrics.Tests
             // 0.3190476190476190476190476190M
             // 0.2857142857142857142857142857M
             // 0.1666666666666666666666666667M
+            // 0.5 <- wprowadzenie startupa
         }
     }
 }
