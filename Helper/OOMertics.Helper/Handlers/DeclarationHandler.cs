@@ -17,6 +17,7 @@ namespace OOMertics.Helper.Handlers
         public DeclarationHandler(BaseTypeDeclarationSyntax declarationNode, DocumentHandler parentDocument)
         {
             DeclarationNode = declarationNode;
+            
             ParentDocument = parentDocument;
             switch (declarationNode)
             {

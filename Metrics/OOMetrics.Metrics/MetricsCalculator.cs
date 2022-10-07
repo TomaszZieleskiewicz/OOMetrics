@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using OOMetrics.Abstractions.Interfaces;
-using System.Text.RegularExpressions;
 
 namespace OOMetrics.Metrics
 {
@@ -8,18 +7,20 @@ namespace OOMetrics.Metrics
     {
         private readonly IDeclarationProvider declarationProvider;
         private readonly MetricsCalculatorOptions options;
-        private readonly string testProjectNamePattern = "{0}.Tests";
-        private Regex allowedNamespacesMatcher;
-        public readonly List<Package> Packages = new List<Package>();
+        private IEnumerable<string> allowedPackages;
+        private IEnumerable<string> internalPackages;
+        private readonly List<Package> packages = new List<Package>();
+        public List<Package> Packages { get { return packages.Where(d => allowedPackages.Contains(d.Name)).ToList(); }  }
         public MetricsCalculator(IDeclarationProvider declarationProvider, IOptions<MetricsCalculatorOptions> options)
         {
             this.declarationProvider = declarationProvider;
             this.options = options.Value;
-            allowedNamespacesMatcher = SetMatcherRegexp();
         }
         public async Task AnalyzeData()
         {
             var declarations = await declarationProvider.GetDeclarations();
+            internalPackages = declarations.Select(d => d.ContainingPackage).Distinct();
+            allowedPackages = (!options.PackagesToAnalyze.Any()) ? internalPackages : options.PackagesToAnalyze;
             foreach (var declaration in declarations)
             {
                 var package = RegisterPackage(declaration.ContainingPackage);
@@ -39,41 +40,24 @@ namespace OOMetrics.Metrics
         private bool CheckIfAdd(IDependency dependency, string containingPackage)
         {
             var isFromTheSamePackage = dependency.ContainingPackage == containingPackage;
-            var allowedNamespace = allowedNamespacesMatcher.IsMatch(dependency.DependencyNamespace)||allowedNamespacesMatcher.IsMatch(dependency.ContainingPackage);
-            var returnValue = !(isFromTheSamePackage || !allowedNamespace);
+            var isFromInternalNamespace = internalPackages.Contains(dependency.ContainingPackage);
+            var returnValue = (isFromInternalNamespace || options.IncludeExtrenalDependencies) && !isFromTheSamePackage;
             return returnValue;
-        }
-        private Regex SetMatcherRegexp()
-        {
-            string pattern;
-            if(options.NamespacesToAnalyze.Count() == 0)
-            {
-                pattern = ".*";
-            } else
-            {
-                pattern = "(";
-                foreach (var allowed in options.NamespacesToAnalyze)
-                {
-                    var glob = allowed.Contains('*') ? "" : "*";
-                    pattern += $"{allowed}{glob}|";
-                }
-                pattern = $"{pattern.Remove(pattern.Length - 1)})";
-            }
-
-            return new Regex(pattern);
         }
         private bool CheckIfAddIncomingDependency(string declarationPackage, string dependencyPackage)
         {
-            var excludedTestDependency = (options.ExcludeIncomingDependenciesFromTests && declarationPackage == string.Format(testProjectNamePattern,dependencyPackage));
-            return !(excludedTestDependency);
+            var isAllowed = allowedPackages.Contains(dependencyPackage);
+            var isFromTests = declarationPackage == string.Format(options.TestProjectNamePattern, dependencyPackage);            
+            var excludedTestDependency = options.ExcludeIncomingDependenciesFromTests && isFromTests;
+            return isAllowed && !(excludedTestDependency);
         }
         private Package RegisterPackage(string packageName)
         {
-            var package = Packages.Where(p => p.Name == packageName).FirstOrDefault();
+            var package = packages.Where(p => p.Name == packageName).FirstOrDefault();
             if (package is null)
             {
                 package = new Package(packageName);
-                Packages.Add(package);
+                packages.Add(package);
             }
             return package;
         }

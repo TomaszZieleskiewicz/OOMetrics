@@ -6,8 +6,9 @@ namespace OOMertics.ConsoleViewer.Tests
 {
     public class TestCommandLineWrapper : ICommandLineWrapper
     {
+        public bool WritingEnabled { get; set; } = true;
         public List<string> WrittenText = new List<string>();
-        public void WriteLine(string text, ConsoleColor foregroundColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black)
+        public void WriteLine(string text, int ident = 0, ConsoleColor foregroundColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black)
         {
             WrittenText.Add(text);
         }
@@ -23,7 +24,7 @@ namespace OOMertics.ConsoleViewer.Tests
             // Act
             await runner.RunAsync();
             // Assert
-            commandLineWrapper.WrittenText.First().Should().Be($"Searching for .sln files in {goodParams[1]}");
+            commandLineWrapper.WrittenText.First().Should().Be("Analyzing everything in ../../../../../OOMetrics.sln ...");
         }
         [Fact]
         public async Task Throw_On_Unrecognized_Command()

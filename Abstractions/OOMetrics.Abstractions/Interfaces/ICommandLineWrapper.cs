@@ -2,6 +2,7 @@
 {
     public interface ICommandLineWrapper
     {
-        void WriteLine(string text, ConsoleColor foregroundColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black);
+        bool WritingEnabled { get; set; }
+        void WriteLine(string text, int ident = 0, ConsoleColor foregroundColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black);
     }
 }

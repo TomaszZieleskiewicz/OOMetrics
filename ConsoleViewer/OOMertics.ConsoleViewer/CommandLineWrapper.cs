@@ -4,11 +4,16 @@ namespace OOMertics.ConsoleViewer
 {
     public class CommandLineWrapper : ICommandLineWrapper
     {
-        public void WriteLine(string text, ConsoleColor foregroundColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black)
+        public bool WritingEnabled { get; set; } = true;
+        public void WriteLine(string text, int ident = 0, ConsoleColor foregroundColor = ConsoleColor.White, ConsoleColor backgroundColor = ConsoleColor.Black)
         {
+            if (!WritingEnabled)
+            {
+                return;
+            }
             Console.BackgroundColor = backgroundColor;
             Console.ForegroundColor = foregroundColor;
-            Console.WriteLine(text);
+            Console.WriteLine($"{new string('\t', ident)}{text}");
             Console.ResetColor();
         }
     }

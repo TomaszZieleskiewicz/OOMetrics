@@ -54,14 +54,14 @@ namespace OOMetrics.Metrics.Tests
             var provider = new SolutionDeclarationProvider(providerOptions);
             var options = new MetricsCalculatorOptions()
             {
-                NamespacesToAnalyze = new[] { "OOMetrics" }
+                PackagesToAnalyze = new[] { "OOMetrics.Metrics" }
             };
-            IOptions<MetricsCalculatorOptions> someWrappedOptions = Options.Create(options);
-            var calculator = new MetricsCalculator(provider, someWrappedOptions);
+            IOptions<MetricsCalculatorOptions> wrappedOptions = Options.Create(options);
+            var calculator = new MetricsCalculator(provider, wrappedOptions);
             await calculator.AnalyzeData();
             var packages = calculator.Packages;
             var totalDistance = packages.Sum(p => p.DistanceFromMainSequence);
-            totalDistance.Should().BeLessThanOrEqualTo(0.584M);
+            totalDistance.Should().BeLessThanOrEqualTo(0.556M);
             // 2.7107142857142857142857142857M
             // 2.5107142857142857142857142857M
             // 1.5583333333333333333333333333M
