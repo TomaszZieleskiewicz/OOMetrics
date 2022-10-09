@@ -8,7 +8,7 @@ namespace OOMertics.Helper.Tests
         [Fact]
         public void CreateNewInstance()
         {
-            var declaration = new Declaration("TestDeclaration", DeclarationType.CLASS_TYPE, "TestNamespace", "TestProject");
+            var declaration = new Declaration("TestDeclaration", DeclarationType.CLASS_TYPE, "TestProject");
             declaration.Name.Should().Be("TestDeclaration");
             declaration.ToString().Should().Be("TestDeclaration(CLASS_TYPE) from TestNamespace in TestProject");
         }

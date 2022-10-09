@@ -32,12 +32,12 @@ namespace OOMetrics.Metrics
                     if (CheckIfAddIncomingDependency(declaration.ContainingPackage, dependency.ContainingPackage))
                     {
                         var referencedPackage = RegisterPackage(dependency.ContainingPackage);
-                        referencedPackage.AddIncomingDependency(declaration.ToDependency());
+                        referencedPackage.AddIncomingDependency(declaration);
                     }
                 }
             }
         }
-        private bool CheckIfAdd(IDependency dependency, string containingPackage)
+        private bool CheckIfAdd(IDeclaration dependency, string containingPackage)
         {
             var isFromTheSamePackage = dependency.ContainingPackage == containingPackage;
             var isFromInternalNamespace = internalPackages.Contains(dependency.ContainingPackage);

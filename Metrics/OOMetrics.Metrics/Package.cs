@@ -13,8 +13,8 @@ namespace OOMetrics.Metrics
         public decimal DistanceFromMainSequence { get => Math.Abs(Instability + Abstractness - 1); }
         // TO DO: Add cohesion metric from https://www.researchgate.net/publication/31598248_A_Validation_of_Martin's_Metric
         public ICollection<IDeclaration> Declarations { get; } = new List<IDeclaration>();
-        public ICollection<IDependency> OutgoingDependencies { get; private set; } = new List<IDependency>();
-        public ICollection<IDependency> IncomingDependencies { get; private set; } = new List<IDependency>();
+        public ICollection<IDeclaration> OutgoingDependencies { get; private set; } = new List<IDeclaration>();
+        public ICollection<IDeclaration> IncomingDependencies { get; private set; } = new List<IDeclaration>();
         public Package(string name)
         {
             Name = name;
@@ -23,11 +23,11 @@ namespace OOMetrics.Metrics
         {
             AddIfNew(Declarations, declaration);
         }
-        public void AddIncomingDependency(IDependency incomingDependency)
+        public void AddIncomingDependency(IDeclaration incomingDependency)
         {
             AddIfNew(IncomingDependencies, incomingDependency);
         }
-        public void AddOutgoingDependency(IDependency outgoingDependency)
+        public void AddOutgoingDependency(IDeclaration outgoingDependency)
         {
             AddIfNew(OutgoingDependencies, outgoingDependency);
         }

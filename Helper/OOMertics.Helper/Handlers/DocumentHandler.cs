@@ -30,7 +30,7 @@ namespace OOMertics.Helper.Handlers
         private List<DeclarationHandler> createDeclarations()
         {
             var syntaxNodes = SemanticModel.SyntaxTree.GetRoot().DescendantNodes(n => true);
-            return syntaxNodes.OfType<BaseTypeDeclarationSyntax>().Select(btds => new DeclarationHandler(btds, this)).ToList();
+            return syntaxNodes.OfType<BaseTypeDeclarationSyntax>().Select(btds => new DeclarationHandler(btds, SemanticModel)).ToList();
         }
         public override string ToString()
         {

@@ -9,28 +9,22 @@ namespace OOMertics.Helper.Implementations
         private static readonly DeclarationType[] AbstractTypes = new[] { DeclarationType.INTERFACE_TYPE, DeclarationType.ENUM_TYPE, DeclarationType.ABSTRACT_CLASS_TYPE };
         public string Name { get; }
         public DeclarationType Type { get; }
-        public string DeclarationNamespace { get; }
         public string ContainingPackage { get; }
-        public ICollection<IDependency> Dependencies { get; } = new List<IDependency>();
+        public ICollection<IDeclaration> Dependencies { get; } = new List<IDeclaration>();
         public bool IsAbstract => AbstractTypes.Contains(Type);
-        public Declaration(string name, DeclarationType type, string declarationNamespace, string containingPackage)
+        public Declaration(string name, DeclarationType type, string containingPackage)
         {
             Name = name;
             Type = type;
-            DeclarationNamespace = declarationNamespace;
             ContainingPackage = containingPackage;
         }
-        public void AddDependency(IDependency dependency)
+        public void AddDependency(IDeclaration dependency)
         {
             Dependencies.Add(dependency);
         }
-        public IDependency ToDependency()
-        {
-            return new Dependency(Name, DeclarationNamespace, ContainingPackage);
-        }
         public override string ToString()
         {
-            return $"{(IsAbstract?"Abstract ":"")}{Name}({Type}) from {DeclarationNamespace} in {ContainingPackage}";
+            return $"{(IsAbstract?"Abstract ":"")}{Name}({Type}) in {ContainingPackage}";
         }
     }
 }

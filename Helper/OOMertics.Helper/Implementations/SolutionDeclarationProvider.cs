@@ -22,13 +22,16 @@ namespace OOMertics.Helper.Implementations
             {
                 foreach (var document in project.Documents)
                 {
+                    
                     foreach (var rawDeclaration in document.Declarations)
                     {
-                        var declaration = new Declaration(rawDeclaration.Name, rawDeclaration.Type, rawDeclaration.Namespace, project.AssemblyName);
-                        foreach (var dependency in rawDeclaration.Dependencies)
+                        var declaration = new Declaration(rawDeclaration.Name, rawDeclaration.Type, rawDeclaration.ContainingAssemblyName);
+                        /*
+                        foreach (var rawDependency in rawDeclaration.Dependencies.Select(d => new DeclarationHandler(d, document) ))
                         {
-                            declaration.AddDependency(new Dependency(dependency.Name, dependency.ContainingNamespace.Name, dependency.ContainingAssembly.Name));
+                            declaration.AddDependency(new Declaration(rawDependency.Name, rawDependency.Type, rawDependency.ContainingAssemblyName));
                         }
+                        */
                         declarations.Add(declaration);
                     }
                 }

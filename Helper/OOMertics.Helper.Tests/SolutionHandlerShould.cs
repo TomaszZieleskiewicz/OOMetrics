@@ -48,21 +48,18 @@ namespace OOMertics.Helper.Tests
             var simpleClassDocument = testProject.Documents.Where(p => p.ToString() == "SimpleClass.cs").First();
             var simpleClassDeclaration = simpleClassDocument.Declarations.First();
             simpleClassDeclaration.Name.Should().Be("SimpleClass");
-            simpleClassDeclaration.Namespace.Should().Be("TestProject"); ;
             simpleClassDeclaration.Type.Should().Be(DeclarationType.CLASS_TYPE);
-            simpleClassDeclaration.Dependencies.Where(d => d.ContainingNamespace.Name == "TestProject").Count().Should().Be(0);
+            // simpleClassDeclaration.Dependencies.Where(d => d.Identifier.ToString() == "TestProject").Count().Should().Be(0);
 
             var classWithInterfaceDocument = testProject.Documents.Where(p => p.ToString() == "ClassWithInterface.cs").First();
             var classWithInterfaceDeclaration = classWithInterfaceDocument.Declarations.First();
             classWithInterfaceDeclaration.Name.Should().Be("ClassWithInterface");
-            classWithInterfaceDeclaration.Namespace.Should().Be("TestProject"); ;
             classWithInterfaceDeclaration.Type.Should().Be(DeclarationType.CLASS_TYPE);
-            classWithInterfaceDeclaration.Dependencies.Where(d => d.ContainingNamespace.Name == "TestProject").Count().Should().Be(1);
+            // classWithInterfaceDeclaration.Dependencies.Where(d => d.Identifier.ToString() == "TestProject").Count().Should().Be(1);
 
             var abstractClass = abstractStableProject.Documents.Where(p => p.ToString() == "AbstractClass.cs").First();
             var abstractClassDeclaration = abstractClass.Declarations.First();
             abstractClassDeclaration.Name.Should().Be("AbstractClass");
-            abstractClassDeclaration.Namespace.Should().Be("AbstractStableProject"); ;
             abstractClassDeclaration.Type.Should().Be(DeclarationType.ABSTRACT_CLASS_TYPE);
         }
     }

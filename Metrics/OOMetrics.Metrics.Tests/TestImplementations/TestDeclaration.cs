@@ -12,7 +12,7 @@ namespace OOMetrics.Metrics.Tests.TestImplementations
         public DeclarationType Type { get; }
         public string DeclarationNamespace { get; }
         public string ContainingPackage { get; }
-        public ICollection<IDependency> Dependencies { get; } = new List<IDependency>();
+        public ICollection<IDeclaration> Dependencies { get; } = new List<IDeclaration>();
         public bool IsAbstract => AbstractTypes.Contains(Type);
         public TestDeclaration(string name, DeclarationType type, string declarationNamespace, string containingPackage)
         {
@@ -21,13 +21,9 @@ namespace OOMetrics.Metrics.Tests.TestImplementations
             DeclarationNamespace = declarationNamespace;
             ContainingPackage = containingPackage;
         }
-        public void AddDependency(IDependency dependency)
+        public void AddDependency(IDeclaration dependency)
         {
             Dependencies.Add(dependency);
-        }
-        public IDependency ToDependency()
-        {
-            return new TestDependency(Name, DeclarationNamespace, ContainingPackage);
         }
         public override string ToString()
         {

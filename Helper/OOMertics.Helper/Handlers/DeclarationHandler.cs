@@ -7,93 +7,87 @@ namespace OOMertics.Helper.Handlers
 {
     public class DeclarationHandler
     {
-        private readonly BaseTypeDeclarationSyntax DeclarationNode;
-        private readonly DocumentHandler ParentDocument;
+        private readonly SemanticModel SemanticModel;
 
         public readonly string Name;
         public readonly DeclarationType Type;
-        public readonly string Namespace;
+        public readonly string ContainingAssemblyName;
         public readonly HashSet<INamedTypeSymbol> Dependencies = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
-        public DeclarationHandler(BaseTypeDeclarationSyntax declarationNode, DocumentHandler parentDocument)
+        public DeclarationHandler(BaseTypeDeclarationSyntax declarationNode, SemanticModel semanticModel)
         {
-            DeclarationNode = declarationNode;
-            
-            ParentDocument = parentDocument;
+            if(semanticModel == null)
+            {
+                throw new ArgumentNullException($"Semantic model null for {declarationNode.Identifier}");
+            }
+            SemanticModel = semanticModel;
+            ContainingAssemblyName = SemanticModel.GetSymbolInfo(declarationNode).Symbol?.ContainingAssembly.Name;
+            Name = declarationNode.Identifier.ToString();
+
             switch (declarationNode)
             {
                 case EnumDeclarationSyntax enumDeclaration:
-                    Name = enumDeclaration.Identifier.ToString();
                     Type = DeclarationType.ENUM_TYPE;
                     break;
                 case ClassDeclarationSyntax classDeclaration:
-                    Name = classDeclaration.Identifier.ToString();
                     var isAbstract = classDeclaration.Modifiers.Any(x => x.IsKind(SyntaxKind.AbstractKeyword));
                     Type = isAbstract ? DeclarationType.ABSTRACT_CLASS_TYPE : DeclarationType.CLASS_TYPE;
                     break;
                 case InterfaceDeclarationSyntax interfaceDeclaration:
-                    Name = interfaceDeclaration.Identifier.ToString();
                     Type = DeclarationType.INTERFACE_TYPE;
                     break;
                 case RecordDeclarationSyntax recordDeclaration:
-                    Name = recordDeclaration.Identifier.ToString();
                     Type = DeclarationType.RECORD_TYPE;
                     break;
                 case StructDeclarationSyntax structDeclaration:
-                    Name = structDeclaration.Identifier.ToString();
                     Type = DeclarationType.STRUCT_TYPE;
                     break;
                 default:
-                    throw new ArgumentException($"Unknown declaration type: {declarationNode.GetType()}");
+                    throw new ArgumentException($"Unknown declaration type: {declarationNode.GetType()} for {Name}");
             }
-            Namespace = GetNamespace(declarationNode);
-            ParentDocument = parentDocument;
-            FindDependencies();
+
+            FindDependencies(declarationNode);
         }
-        private void FindDependencies()
+        public DeclarationHandler(INamedTypeSymbol declarationSymbol, SemanticModel semanticModel)
         {
-            var declarationNodes = DeclarationNode.DescendantNodes(n => true);
+            SemanticModel = semanticModel;
+            ContainingAssemblyName = declarationSymbol.ContainingAssembly.Name;
+            Name = declarationSymbol.Name;
+            switch (declarationSymbol.TypeKind)
+            {
+                case TypeKind.Class:
+                    Type = declarationSymbol.IsAbstract? DeclarationType.ABSTRACT_CLASS_TYPE : declarationSymbol.IsRecord? DeclarationType.RECORD_TYPE: DeclarationType.CLASS_TYPE;
+                    break;
+                case TypeKind.Interface:
+                    Type = DeclarationType.INTERFACE_TYPE;
+                    break;
+                case TypeKind.Enum:
+                    Type = DeclarationType.ENUM_TYPE;
+                    break;
+                case TypeKind.Struct:
+                    Type = DeclarationType.STRUCT_TYPE;
+                    break;
+                default :
+                    throw new ArgumentException($"Unknown type kind: {declarationSymbol.TypeKind} for {Name}");
+            }
+        }
+
+        private void FindDependencies(BaseTypeDeclarationSyntax node)
+        {
+            var declarationNodes = node.DescendantNodes(n => true);
             var namedTypes = declarationNodes
                 .OfType<IdentifierNameSyntax>()
-                .Select(ins => ParentDocument.SemanticModel.GetSymbolInfo(ins).Symbol)
+                .Select(ins => SemanticModel.GetSymbolInfo(ins).Symbol)
                 .ToHashSet(SymbolEqualityComparer.Default)
                 .OfType<INamedTypeSymbol>();
 
             var expressionTypes = declarationNodes
                 .OfType<ExpressionSyntax>()
-                .Select(es => ParentDocument.SemanticModel.GetTypeInfo(es).Type)
+                .Select(es => SemanticModel.GetTypeInfo(es).Type)
                 .ToHashSet(SymbolEqualityComparer.Default)
                 .OfType<INamedTypeSymbol>();
 
             Dependencies.UnionWith(namedTypes);
             Dependencies.UnionWith(expressionTypes);
-        }
-        private string GetNamespace(BaseTypeDeclarationSyntax syntax)
-        {
-            string nameSpace = string.Empty;
-            SyntaxNode? potentialNamespaceParent = syntax.Parent;
-
-            while (potentialNamespaceParent != null &&
-                    potentialNamespaceParent is not NamespaceDeclarationSyntax
-                    && potentialNamespaceParent is not FileScopedNamespaceDeclarationSyntax)
-            {
-                potentialNamespaceParent = potentialNamespaceParent.Parent;
-            }
-
-            if (potentialNamespaceParent is BaseNamespaceDeclarationSyntax namespaceParent)
-            {
-                nameSpace = namespaceParent.Name.ToString();
-                while (true)
-                {
-                    if (namespaceParent.Parent is not NamespaceDeclarationSyntax parent)
-                    {
-                        break;
-                    }
-                    nameSpace = $"{namespaceParent.Name}.{nameSpace}";
-                    namespaceParent = parent;
-                }
-            }
-
-            return nameSpace;
         }
         public override string ToString()
         {
