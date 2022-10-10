@@ -1,4 +1,5 @@
 ﻿using OOMetrics.Abstractions.Interfaces;
+using System;
 using System.Globalization;
 
 namespace OOMetrics.Metrics
@@ -40,9 +41,9 @@ namespace OOMetrics.Metrics
         {
             return Declarations.Where(d => d.IsAbstract);
         }
-        private static void AddIfNew<T>(ICollection<T> list, T dependency) where T : IComparableByStringHash
+        private static void AddIfNew<T>(ICollection<T> list, T dependency) where T : IEquatable<T>
         {
-            var isNew = !list.Any(d => d != null && d.CompareByStringHash(dependency));
+            var isNew = !list.Any(d => d != null && d.Equals(dependency));
             if (isNew)
             {
                 list.Add(dependency);

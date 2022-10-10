@@ -1,12 +1,14 @@
-﻿using Microsoft.Extensions.Options;
-using OOMertics.Helper.Handlers;
+﻿using Microsoft.Build.Locator;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.MSBuild;
+using Microsoft.Extensions.Options;
 using OOMetrics.Abstractions.Interfaces;
 
 namespace OOMertics.Helper.Implementations
 {
     public class SolutionDeclarationProvider : IDeclarationProvider
     {
-        private SolutionHandler? solutionHandler;
         private SolutionDeclarationProviderOptions _options;
 
         public SolutionDeclarationProvider(IOptions<SolutionDeclarationProviderOptions> options)
@@ -15,25 +17,30 @@ namespace OOMertics.Helper.Implementations
         }
         public async Task<ICollection<IDeclaration>> GetDeclarations()
         {
-            solutionHandler ??= await SolutionHandler.OpenAsync(_options.Path, _options.SolutionName);
-
-            var declarations = new List<IDeclaration>();
-            foreach (var project in solutionHandler.Projects)
+            var solutionFilePath = Directory.GetFiles($"{_options.Path}", $"{_options.SolutionName}.sln", SearchOption.AllDirectories).Single();
+            if (!MSBuildLocator.IsRegistered)
             {
-                foreach (var document in project.Documents)
+                MSBuildLocator.RegisterDefaults();
+            }
+
+            var workspace = MSBuildWorkspace.Create();
+
+            await workspace.OpenSolutionAsync(solutionFilePath);
+            var projects = workspace.CurrentSolution.Projects;
+            var declarations = new List<IDeclaration>();
+            foreach (var project in projects)
+            {
+                var compilation = await project.GetCompilationAsync();
+                var documents = projects.SelectMany(p => p.Documents).ToArray();
+                foreach (var document in documents)
                 {
-                    
-                    foreach (var rawDeclaration in document.Declarations)
+                    var semanticModel = await document.GetSemanticModelAsync();
+                    if (semanticModel == null)
                     {
-                        var declaration = new Declaration(rawDeclaration.Name, rawDeclaration.Type, rawDeclaration.ContainingAssemblyName);
-                        /*
-                        foreach (var rawDependency in rawDeclaration.Dependencies.Select(d => new DeclarationHandler(d, document) ))
-                        {
-                            declaration.AddDependency(new Declaration(rawDependency.Name, rawDependency.Type, rawDependency.ContainingAssemblyName));
-                        }
-                        */
-                        declarations.Add(declaration);
+                        throw new Exception($"Can not find semantic model for {document.Name}");
                     }
+                    var syntaxNodes = semanticModel.SyntaxTree.GetRoot().DescendantNodes(n => true).ToArray();
+                    declarations = declarations.Concat(syntaxNodes.OfType<BaseTypeDeclarationSyntax>().Select(d => DeclarationFactory.CreateFromSyntax(d, semanticModel))).ToList();
                 }
             }
             return declarations;
