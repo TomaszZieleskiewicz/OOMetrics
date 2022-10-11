@@ -7,6 +7,7 @@
         ABSTRACT_CLASS_TYPE,
         INTERFACE_TYPE,
         RECORD_TYPE,
-        STRUCT_TYPE
+        STRUCT_TYPE,
+        UNKNOWN
     }
 }

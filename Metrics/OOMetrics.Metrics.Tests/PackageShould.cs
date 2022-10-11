@@ -27,8 +27,8 @@ namespace OOMetrics.Metrics.Tests
         public void ProperlyCalculateOnSimplePackage()
         {
             var packageName = "packageA";
-            var IA = new TestDeclaration("IA", DeclarationType.INTERFACE_TYPE, packageName, true, new ImmutableArray<IDeclaration>());
-            var A = new TestDeclaration("A", DeclarationType.CLASS_TYPE, packageName, true, new ImmutableArray<IDeclaration>());
+            var IA = new TestDeclaration("IA", DeclarationType.INTERFACE_TYPE, packageName, new ImmutableArray<IDeclaration>());
+            var A = new TestDeclaration("A", DeclarationType.CLASS_TYPE, packageName, new ImmutableArray<IDeclaration>());
             var package = new Package(packageName);
             package.AddDeclaration(A);
             package.AddDeclaration(IA);
@@ -47,12 +47,12 @@ namespace OOMetrics.Metrics.Tests
         public void ProperlyCalculateOnMoreComplexPackage()
         {
             var packageName = "packageA";
-            var IA = new TestDeclaration("IA", DeclarationType.INTERFACE_TYPE, packageName, true, new ImmutableArray<IDeclaration>());
-            var A = new TestDeclaration("A", DeclarationType.CLASS_TYPE, packageName, true, new ImmutableArray<IDeclaration>());
-            var InD1 = new TestDeclaration("InD1", DeclarationType.CLASS_TYPE, "InDPackage", true, new ImmutableArray<IDeclaration>());
-            var InD2 = new TestDeclaration("InD2", DeclarationType.CLASS_TYPE, "InDPackage", true, new ImmutableArray<IDeclaration>());
-            var InD3 = new TestDeclaration("InD3", DeclarationType.CLASS_TYPE, "InD3Package", true, new ImmutableArray<IDeclaration>());
-            var OutD3 = new TestDeclaration("OutD3", DeclarationType.CLASS_TYPE, "OutD3Package", true, new ImmutableArray<IDeclaration>());
+            var IA = new TestDeclaration("IA", DeclarationType.INTERFACE_TYPE, packageName, new ImmutableArray<IDeclaration>());
+            var A = new TestDeclaration("A", DeclarationType.CLASS_TYPE, packageName, new ImmutableArray<IDeclaration>());
+            var InD1 = new TestDeclaration("InD1", DeclarationType.CLASS_TYPE, "InDPackage", new ImmutableArray<IDeclaration>());
+            var InD2 = new TestDeclaration("InD2", DeclarationType.CLASS_TYPE, "InDPackage", new ImmutableArray<IDeclaration>());
+            var InD3 = new TestDeclaration("InD3", DeclarationType.CLASS_TYPE, "InD3Package", new ImmutableArray<IDeclaration>());
+            var OutD3 = new TestDeclaration("OutD3", DeclarationType.CLASS_TYPE, "OutD3Package", new ImmutableArray<IDeclaration>());
             var package = new Package(packageName);
             package.AddDeclaration(A);
             package.AddDeclaration(IA);
@@ -74,18 +74,18 @@ namespace OOMetrics.Metrics.Tests
         public void NotAddTheSameObjectTwice()
         {
             var packageName = "packageA";
-            var IA = new TestDeclaration("IA", DeclarationType.INTERFACE_TYPE, packageName, true, new ImmutableArray<IDeclaration>());
-            var IAp = new TestDeclaration("IA", DeclarationType.INTERFACE_TYPE, packageName, true, new ImmutableArray<IDeclaration>());
-            var A = new TestDeclaration("A", DeclarationType.CLASS_TYPE, packageName, true, new ImmutableArray<IDeclaration>());
-            var Ap = new TestDeclaration("A", DeclarationType.CLASS_TYPE, packageName, true, new ImmutableArray<IDeclaration>());
-            var InD1 = new TestDeclaration("InD1", DeclarationType.CLASS_TYPE, "InDPackage", true, new ImmutableArray<IDeclaration>());
-            var InD1p = new TestDeclaration("InD1", DeclarationType.CLASS_TYPE,"InDPackage", true, new ImmutableArray<IDeclaration>());
-            var InD2 = new TestDeclaration("InD2", DeclarationType.INTERFACE_TYPE, "InDPackage", true, new ImmutableArray<IDeclaration>());
-            var InD2p = new TestDeclaration("InD2", DeclarationType.INTERFACE_TYPE, "InDPackage", true, new ImmutableArray<IDeclaration>());
-            var InD3 = new TestDeclaration("InD3", DeclarationType.CLASS_TYPE, "InD3Package", true, new ImmutableArray<IDeclaration>());
-            var InD3p = new TestDeclaration("InD3", DeclarationType.CLASS_TYPE, "InD3Package", true, new ImmutableArray<IDeclaration>());
-            var OutD3 = new TestDeclaration("OutD3", DeclarationType.ABSTRACT_CLASS_TYPE, "OutD3Package", true, new ImmutableArray<IDeclaration>());
-            var OutD3p = new TestDeclaration("OutD3", DeclarationType.ABSTRACT_CLASS_TYPE, "OutD3Package", true, new ImmutableArray<IDeclaration>());
+            var IA = new TestDeclaration("IA", DeclarationType.INTERFACE_TYPE, packageName, new ImmutableArray<IDeclaration>());
+            var IAp = new TestDeclaration("IA", DeclarationType.INTERFACE_TYPE, packageName, new ImmutableArray<IDeclaration>());
+            var A = new TestDeclaration("A", DeclarationType.CLASS_TYPE, packageName, new ImmutableArray<IDeclaration>());
+            var Ap = new TestDeclaration("A", DeclarationType.CLASS_TYPE, packageName, new ImmutableArray<IDeclaration>());
+            var InD1 = new TestDeclaration("InD1", DeclarationType.CLASS_TYPE, "InDPackage", new ImmutableArray<IDeclaration>());
+            var InD1p = new TestDeclaration("InD1", DeclarationType.CLASS_TYPE,"InDPackage", new ImmutableArray<IDeclaration>());
+            var InD2 = new TestDeclaration("InD2", DeclarationType.INTERFACE_TYPE, "InDPackage", new ImmutableArray<IDeclaration>());
+            var InD2p = new TestDeclaration("InD2", DeclarationType.INTERFACE_TYPE, "InDPackage", new ImmutableArray<IDeclaration>());
+            var InD3 = new TestDeclaration("InD3", DeclarationType.CLASS_TYPE, "InD3Package", new ImmutableArray<IDeclaration>());
+            var InD3p = new TestDeclaration("InD3", DeclarationType.CLASS_TYPE, "InD3Package", new ImmutableArray<IDeclaration>());
+            var OutD3 = new TestDeclaration("OutD3", DeclarationType.ABSTRACT_CLASS_TYPE, "OutD3Package", new ImmutableArray<IDeclaration>());
+            var OutD3p = new TestDeclaration("OutD3", DeclarationType.ABSTRACT_CLASS_TYPE, "OutD3Package", new ImmutableArray<IDeclaration>());
             var package = new Package(packageName);
             package.AddDeclaration(A);
             package.AddDeclaration(Ap);

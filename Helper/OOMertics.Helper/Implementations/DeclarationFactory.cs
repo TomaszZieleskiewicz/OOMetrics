@@ -10,7 +10,7 @@ namespace OOMertics.Helper.Implementations
     public static class DeclarationFactory
     {
         // TO DO: Add static list of already created declarations for performance? Wait for performance issues. :)
-        private static readonly DeclarationType[] AbstractTypes = new[] { DeclarationType.INTERFACE_TYPE, DeclarationType.ENUM_TYPE, DeclarationType.ABSTRACT_CLASS_TYPE };
+        
         public static IDeclaration CreateFromSyntax(BaseTypeDeclarationSyntax declarationNode, SemanticModel semanticModel)
         {
             if (semanticModel == null)
@@ -18,15 +18,16 @@ namespace OOMertics.Helper.Implementations
                 throw new ArgumentNullException($"Semantic model is null for {declarationNode.Identifier}");
             }
             var symbol = semanticModel.GetSymbolInfo(declarationNode).Symbol;
-            if (symbol == null)
+            var containingPackage = string.Empty;
+            // TODO: throw on lack od symbol
+            if (symbol != null)
             {
-                throw new ArgumentNullException($"Symbol is null for {declarationNode.Identifier}");
+                containingPackage = symbol.ContainingAssembly.Name;
             }
             var name = declarationNode.Identifier.ToString();
             var type = GetType(declarationNode);
-            var containingPackage = symbol.ContainingAssembly.Name;
-
-            return new Declaration(name, type, containingPackage, IsAbstract(type), FindDependencies(declarationNode, semanticModel));
+            
+            return new Declaration(name, type, containingPackage, FindDependencies(declarationNode, semanticModel));
         }
         private static ImmutableArray<IDeclaration> FindDependencies(BaseTypeDeclarationSyntax node, SemanticModel semanticModel)
         {
@@ -48,14 +49,10 @@ namespace OOMertics.Helper.Implementations
                 .ToHashSet(SymbolEqualityComparer.Default)
                 .OfType<INamedTypeSymbol>();
         }
-        private static bool IsAbstract(DeclarationType type)
-        {
-            return AbstractTypes.Contains(type);
-        }
         private static Declaration CreateFromSymbol(INamedTypeSymbol symbol)
         {
             var type = GetType(symbol);
-            return new Declaration(symbol.Name, type, symbol.ContainingAssembly.Name, IsAbstract(type), new ImmutableArray<IDeclaration>());
+            return new Declaration(symbol.Name, type, symbol.ContainingAssembly.Name, new ImmutableArray<IDeclaration>());
         }
         private static DeclarationType GetType(BaseTypeDeclarationSyntax declarationNode)
         {
@@ -77,7 +74,7 @@ namespace OOMertics.Helper.Implementations
                 TypeKind.Interface => DeclarationType.INTERFACE_TYPE,
                 TypeKind.Enum => DeclarationType.ENUM_TYPE,
                 TypeKind.Struct => DeclarationType.STRUCT_TYPE,
-                _ => throw new ArgumentException($"Unknown type kind: {declarationSymbol.TypeKind} for {declarationSymbol.Name}")
+                _ => DeclarationType.UNKNOWN//TODO: Return to this: throw new ArgumentException($"Unknown type kind: {declarationSymbol.TypeKind} for {declarationSymbol.Name}")
             };
         }
     }

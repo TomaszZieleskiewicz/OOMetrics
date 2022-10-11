@@ -41,7 +41,7 @@ namespace OOMetrics.Metrics
         {
             return Declarations.Where(d => d.IsAbstract);
         }
-        private static void AddIfNew<T>(ICollection<T> list, T dependency) where T : IEquatable<T>
+        private static void AddIfNew<T>(ICollection<T> list, T dependency)
         {
             var isNew = !list.Any(d => d != null && d.Equals(dependency));
             if (isNew)
